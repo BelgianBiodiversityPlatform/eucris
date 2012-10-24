@@ -1,0 +1,5 @@
+<tr>
+  <td><%= link_to funding.name, funding %></td>
+  <td><%if !funding.classification.nil? %><%= funding.classification.term %><%else%>&nbsp;<%end%></td>
+  <td><%= number_to_currency(funding.amount, :unit => funding.currency , :delimiter =>".", :format => "%n %u") %></td>
+</tr>

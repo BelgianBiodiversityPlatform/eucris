@@ -1,0 +1,12 @@
+<h3>Projects</h3>
+<table class="table table-striped">
+<tr>
+  <th>Title</th>
+</tr>
+<% @projects.each do |project| %>
+<tr>
+  <td><%= link_to project.title, project %></td>
+</tr>
+<% end %>
+</table>
+<p><small> source:<%= link_to @source.origid, @source %></small></p>

@@ -1,0 +1,36 @@
+<h1><%=@title%></h1>
+ 
+ <%= form_for(@user) do |f| %>
+ <% if @user.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+<span class="help-block">* denotes required field.</span>
+
+<%= f.label :login, 'Your login *' %>
+<%= f.text_field :login, :required => 'required' %><BR>
+<%= f.label :firstname %>
+<%= f.text_field :firstname%><BR>
+<%= f.label :family_name %>
+<%= f.text_field :familyname%><BR>
+<%= f.label :institution, 'Your Institution *' %>
+<%= f.text_field :institution, :required => 'required'  %><BR>
+<%= f.label "Your country"%>
+<%= f.select "country_id", options_from_collection_for_select(@countries, "id", "name"), :include_blank => true %>
+<%= f.label :purpose, 'Purpose of use *'%>
+<%= f.text_area :purpose, :size =>"40x5", :required => 'required'  %><BR>
+<%= f.label :email, 'Your email *' %>
+<%= f.text_field :email, :required => 'required' %><BR>
+<%= f.label :password, 'Your password *' %>
+<%= f.password_field :password, :required => 'required' %><BR>
+<%= f.label :password_confirmation, 'Re-enter your password *' %>
+<%= f.password_field :password_confirmation, :required => 'required' %><BR>
+<%= f.submit %>
+<% end %>
+

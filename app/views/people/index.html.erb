@@ -1,0 +1,13 @@
+<h3>People</h3>
+
+<table class="table table-striped">
+<tr>
+  <th>Name</th>
+</tr>
+<% @people.each do |person| %>
+<tr>
+  <td><%= link_to person.fullname, person %></td>
+</tr>
+<% end %>
+</table>
+<p><small> source:<%= link_to @source.origid, @source %></small></p>

@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Classification Term:<%= @classification.origid %></h3>
+<dl class="dl-horizontal">
+	<dt>Scheme</dt><dd><%= link_to @classification.classscheme.origid, scheme_path( @classification.classscheme) %></dd>
+	<dt>Term</dt><dd><%= @classification.term %></dd>
+</dl>
+
+<% if !@classification.fundings.empty? %>
+<h3>Fundings</h3>
+<table class="table table-striped">
+<tr>
+<th>Name</th>
+</tr>
+<% @classification.fundings.each do |funding| %>
+	<tr>
+	  <td><%= link_to funding.name, funding %></td>
+	</tr>
+<% end %>	
+</table>
+<% end %>
+
+<% if !@classification.projects.empty? %>
+<h3>Projects</h3>
+<table class="table table-striped">
+<tr>
+<th>Title</th>
+</tr>
+<% @classification.projects.each do |project| %>
+	<tr>
+	  <td><%= link_to project.title, project %></td>
+	</tr>
+<% end %>	
+</table>
+<% end %>
+
+<% if !@classification.orgunits.empty? %>
+<h3>Orgunits</h3>
+<table class="table table-striped">
+<tr>
+<th>Name</th>
+</tr>
+<% @classification.orgunits.each do |orgunit| %>
+	<tr>
+	  <td><%= link_to orgunit.name, orgunit %></td>
+	</tr>
+<% end %>	
+</table>
+<% end %>
+
+<% if !@classification.people.empty? %>
+<h3>People</h3>
+<table class="table table-striped">
+<tr>
+<th>Name</th>
+</tr>
+<% @classification.people.each do |person| %>
+	<tr>
+	  <td><%= link_to person.fullname, person %></td>
+	</tr>
+<% end %>	
+</table>
+<% end %>
+
+<p><small>created:<%= @classification.created_at %></small></p>

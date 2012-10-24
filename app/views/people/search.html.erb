@@ -1,0 +1,27 @@
+<div class="well btn-group">
+<%= form_tag search_people_path, :method => :get do %>
+  <%= text_field_tag :query, params[:query] %> 
+  <%= submit_tag "Search", :class => "btn btn-info" %>
+  <%= label_tag "narrow search to country:"%>
+  <%= select_tag "country", options_from_collection_for_select(@countries, "id", "name", params[:country]), :include_blank => true %>
+
+<% end %>
+</div>
+<p id="notice"><%= notice %></p>
+
+<%if !@people.empty? %>
+<h3>People</h3>
+<table class="table table-striped">
+<tr>
+  <th>Name</th>
+  <%if !params[:query].empty?%><th>Relevance</th><%end%>
+</tr>
+<% @people.each do |person| %>
+<tr>
+  <td><%= link_to person.fullname, person %></td>
+  <%if !params[:query].empty?%><td><%= number_to_percentage(person.rank, :precision => 2) %></td><%end%>
+</tr>
+<% end %>
+</table>
+<%= paginate @people %>
+<% end %>

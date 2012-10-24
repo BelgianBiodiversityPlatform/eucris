@@ -1,0 +1,32 @@
+<h3>Sources</h3>
+<div class="well">
+<% if @tag_cloud_hash != nil %>
+	<% @tag_cloud_hash.each_pair do |tag,size| %>
+	<%= link_to tag.origid, source_path(tag), :title => "#{tag.fucount} fundings, #{tag.prcount} projects, #{tag.pecount} people & #{tag.oucount} orgunits", :style => "font-size:#{size}px;" %>
+	<% end %>
+<% end %>
+</div>
+
+<table class="table table-striped">  <tr>
+    <th>Source</th>
+    <th>#Fundings</th>
+    <th>#Projects</th>
+    <th>#People</th>
+    <th>#Orgunits</th>
+    <th>Updated</th>
+  </tr>
+
+<% @sources.each do |source| %>
+  <tr>
+    <td><%= link_to source.origid, source %></td>
+    <td><%= link_to source.fucount, fundings_path('source' => source) %></td>
+    <td><%= link_to source.prcount, projects_path('source' => source) %></td>
+    <td><%= link_to source.pecount, people_path('source' => source) %></td>
+    <td><%= link_to source.oucount, orgunits_path('source' => source) %></td>
+    <td><%=source.updated_at %></td>
+  </tr>
+<% end %>
+</table>
+
+
+

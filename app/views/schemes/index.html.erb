@@ -1,0 +1,14 @@
+<h3>Classifications Schemes</h3>
+<table class="table table-striped">
+<tr>
+  <th>Scheme</th>
+  <th>Description</th>
+
+</tr>
+<% @classschemes.each do |cs| %>
+  <tr>
+    <td><%= link_to cs.origid, scheme_path(cs) %></td>
+    <td><%= cs.description %></td>
+  </tr>
+<% end %>
+</table>

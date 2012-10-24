@@ -1,0 +1,25 @@
+<h2>ContactUs</h2>
+<%= form_for @contact_message, :url => send_contact_msg_path, :html => { :class => "well"} do |f| %>
+<% if @contact_message.errors.any? %>
+ <div id="errorExplanation">
+   <h2><%= pluralize(@contact_message.errors.count, "error") %> prohibited this message from being send:</h2>
+   <ul>
+   <% @contact_message.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+   <% end %>
+   </ul>
+ </div>
+ <% end %>
+<span class="help-block">* denotes required field.</span>
+    <%= f.label :name,'Your Name *'  %>
+    <%= f.text_field :name, :required => "required"   %>
+    <%= f.label "Your country"%>
+    <%= f.select "country_id", options_from_collection_for_select(@countries, "id", "name"), :include_blank => true %>
+    <%= f.label :email, 'Your Email *'  %>
+    <%= f.email_field :email , :required => 'required'  %>
+    <%= f.label :subject, 'Subject *'  %>
+    <%= f.select :subject,  options_for_select(["Content", "Technical"], "Content") %>
+    <%= f.label :body, 'Comment or Question *'  %>
+    <%= f.text_area :body , :cols => 40, :rows => 20, :required => "required"  %>
+    <%= f.submit %>
+<% end %>

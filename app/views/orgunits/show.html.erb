@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<h3><% if @orgunit.isfunding? %>Funding<% else %>Research<% end %> Orgunit:<%= @orgunit.origid %></h3>
+
+<dl class="dl-horizontal">
+<dt>Name</dt><dd><%= @orgunit.name %></dd>
+<dt>Acronym</dt><dd><%if !@orgunit.acronym.nil?%><%= @orgunit.acronym %>&nbsp;<%else%>&nbsp;<% end %></dd>
+<dt>Address</dt><dd><%if !@orgunit.addrline1.nil?%><%= @orgunit.addrline1 %><BR><%= @orgunit.addrline2 %><%else%>&nbsp;<% end %></dd>
+<dt>Postcode</dt><dd><%if !@orgunit.postcode.nil?%><%= @orgunit.postcode %><%else%>&nbsp;<% end %></dd>
+<dt>City</dt><dd><%if !@orgunit.city.nil?%><%= @orgunit.city %><%else%>&nbsp;<% end %></dd>
+<dt>Tel</dt><dd><%if !@orgunit.tel.nil? && !@orgunit.tel.empty? %><%= @orgunit.tel %><%else%>&nbsp;<% end %></dd>
+<dt>Fax</dt><dd><%if !@orgunit.fax.nil? && !@orgunit.fax.empty? %><%= @orgunit.fax %><%else%>&nbsp;<% end %></dd>
+<dt>Email</dt><dd><%if !@orgunit.email.nil? && !@orgunit.email.empty?%><%= @orgunit.email %><%else%>&nbsp;<% end %></dd>
+<dt>URL</dt><dd><%if !@orgunit.url.nil?%><%= link_to @orgunit.url, @orgunit.url %><%else%>&nbsp;<% end %></dd>
+</dl>
+<h3>Activity</h3>
+<p><%= @orgunit.activity %></p>
+<h3>Keywords</h3>
+<p><%= @orgunit.keywords %></p>
+
+<% if !@orgunit.classifications.empty? %>
+<h3>Classifications</h3>
+<p>
+<%= render :partial => "classifications/classification",
+		           :collection => @orgunit.classifications %>
+</p>
+<% end %>
+<% if !@orgunit.orgunits.empty? %>
+<h3>Orgunits</h3>
+<table class="table table-striped">
+<%= render :partial => "orgunits/header" %>
+<%= render :partial => "orgunits/orgunit",
+	           :collection => @orgunit.orgunits %>
+</table>
+<% end %>
+
+<% if !@orgunit.people.empty? %>
+<h3>People</h3>
+<table class="table table-striped">
+<%= render :partial => "people/header" %>
+<%= render :partial => "people/person",
+	           :collection => @orgunit.people %>
+</table>
+<% end %>
+
+<% if !@orgunit.projects.empty? %>
+<h3>Projects</h3>
+<table class="table table-striped">
+<%= render :partial => "projects/header" %>
+<%= render :partial => "projects/project",
+	           :collection => @orgunit.projects %>
+</table>
+<% end %>
+
+<% if !@orgunit.fundings.empty? %>
+<h3>Fundings Programmes</h3>
+<table class="table table-striped">
+<%= render :partial => "fundings/header" %>
+<%= render :partial => "fundings/funding",
+	           :collection => @orgunit.fundings %>
+</table>
+<% end %>
+
+<p><small>created:<%= @orgunit.created_at %>, source:<%= link_to @orgunit.source.origid, @orgunit.source %></small></p>

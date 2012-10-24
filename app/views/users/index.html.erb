@@ -1,0 +1,12 @@
+<h3>Users</h3>
+<table class="table table-striped"><tr>
+  <th>Name</th>
+  <th>Login</th>
+</tr>
+<% @users.each do |user| %>
+	<tr>
+	  <td><%= link_to user.fullname, user %></td>
+	  <td><%= user.login %></td>
+	</tr>
+<% end %>
+</table>

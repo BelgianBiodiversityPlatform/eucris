@@ -1,0 +1,7 @@
+<h3>Funding:<%= @funding.origid %></h3>
+
+<%= form_for @funding, :url => addClass_funding_path(@funding) do |f| %>
+<%= grouped_collection_select (:classification, :id, @classschemes, :classifications, :description, :id, :term) %>
+<%= f.submit %>
+<% end %>
+

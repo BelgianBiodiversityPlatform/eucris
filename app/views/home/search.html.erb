@@ -1,0 +1,59 @@
+<h2>Enter a search term to discover...</p>
+
+<table width=100% >
+<tr>	
+<td>
+<%= form_tag search_fundings_path, :method => :get, :class => "well form_search" do %>
+  <h4>Funding Programmes</h4>
+  <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %>  <%= submit_tag "Search", :class => "btn btn-info" %> 
+<% end %>
+</td>
+<td>
+<%= form_tag search_orgunits_path, :method => :get, :class => "well form_search"  do %>
+  <h4>Funding organizations</h4>
+  <%= hidden_field_tag(:scope, "funding") %>
+  <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %>  <%= submit_tag "Search", :class => "btn btn-info" %> 
+<% end %>
+</td>
+</tr>
+<tr>	
+<td>
+<%= form_tag search_projects_path, :method => :get, :class => "well form_search" do %>
+  <h4>Projects</h4>
+  <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %> <%= submit_tag "Search", :class => "btn btn-info" %> 
+<% end %>
+</td>
+<td>
+<%= form_tag search_orgunits_path, :method => :get, :class => "well form_search" do %>
+  <h4>Research Organisations</h4>
+  <%= hidden_field_tag(:scope, "research") %>
+  <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %>  <%= submit_tag "Search", :class => "btn btn-info" %> 
+<% end %>
+</td>
+</tr>
+<tr>
+<td>
+<%= form_tag search_people_path, :method => :get, :class => "well form_search" do %>
+  <h4>People</h4>
+  <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %> <%= submit_tag "Search", :class => "btn btn-info" %> 
+<% end %>
+</td>
+<td>
+</td>
+
+</tr>
+</table>
+<h2>How to search?</h2>
+<dl class="dl-horizontal">
+<dt>birds</dt><dd>looks for 'birds' as complete word.</dd>
+<dt>inva:*</dt><dd>looks for words starting with 'inva'.</dd>
+<dt>John | Henry</dt><dd>looks for 'John' OR 'Henry'.</dd>
+<dt>bio &amp; research</dt><dd>looks for 'bio' AND 'research'.</dd>
+<dt>bio research</dt><dd>also looks for 'bio' AND 'research'.</dd>
+<dt>water &amp; !marine</dt><dd>looks for 'water', but NOT 'marine'.</dd>
+<dt>inva:* | alien &amp; !sea</dt><dd>looks for 'words starting with 'inva' OR 'alien', but NOT 'sea'.</dd>
+
+</dl>
+
+<h2>Alternatively</h2>
+<p>You can also browse: <%= link_to "Countries", countries_path, :class => "frbutton" %> or <%= link_to "Classifications", schemes_path , :class => "frbutton" %></p>

@@ -1,0 +1,22 @@
+<h1><%=@title%></h1>
+<% if flash[:error] %>
+<p class="error"><%= flash[:error] %></p>
+<% end %>
+<%= form_for(:session, :url => sessions_path) do |f| %>
+
+  <div class="field">
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Sign in" %>
+  </div>
+<% end %>
+
+<%if !current_user.nil? %>
+<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+<%end%>

@@ -1,0 +1,14 @@
+<h3>Orgunits</h3>
+
+
+<table class="table table-striped">
+<tr>
+  <th>Name</th>
+</tr>
+<% @orgunits.each do |orgunit| %>
+<tr>
+  <td><%= link_to orgunit.name, orgunit %></td>
+</tr>
+<% end %>
+</table>
+<p><small> source:<%= link_to @source.origid, @source %></small></p>

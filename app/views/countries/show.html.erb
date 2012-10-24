@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Country:<%= @country.name %></h3>
+
+<dl class="dl-horizontal">
+<dt>Code</dt><dd><%= @country.code %></dd>
+<dt>Name</dt><dd><%= @country.name %></dd
+</dl>
+
+<% if @country.focount > 0 %>
+<h3>Funding Organisations</h3>
+<table class="table table-striped">
+<tr>
+  <th>Source</th>
+  <th>Name</th>
+</tr>
+<% @country.sources.each do |source| %>
+<% source.orgunits.each do |orgunit| %>
+<% if orgunit.isfunding? %>
+<tr>
+  <td><%= link_to source.acronym, source %></td>
+<td><%= link_to orgunit.name, orgunit %></td>
+</tr>
+<% end %>
+<% end %>
+<% end %>
+</table>
+<% end %>
+
+<% if @country.fucount > 0 %>
+<h3>Funding Programmes</h3>
+<table class="table table-striped">
+<tr>
+  <th>Source</th>
+  <th>Name</th>
+  <th>Amount</th>
+</tr>
+<% @country.sources.each do |source| %>
+<% source.fundings.each do |funding| %>
+<tr>
+  <td><%= link_to source.acronym, source %></td>
+  <td><%= link_to funding.name, funding %></td>
+  <td><%= number_to_currency(funding.amount, :unit => funding.currency, :delimiter =>"." , :format => "%n %u")%></td>
+</tr>
+<% end %>
+<% end %>
+
+</table>
+<% end %>
+<HR>
+<% if @country.rocount > 0 %>
+<h3><%= link_to "Research Orgunits", search_orgunits_path(:query => "", :scope =>"research", :country =>@country) %></h3>
+<% end %>
+<% if @country.prcount > 0 %>
+<h3><%= link_to "Projects", search_projects_path(:query => "", :country =>@country) %></h3>
+<% end %>
+<% if @country.pecount > 0 %>
+<h3><%= link_to "People", search_people_path(:query => "", :country =>@country) %></h3>
+<% end %>

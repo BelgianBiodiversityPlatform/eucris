@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+<h3 class="head">Funding:<%= @funding.origid %></h3>
+
+<dl class="dl-horizontal">
+<dt>Name</dt><dd><%= @funding.name %></dd>
+<dt>Total budget</dt><dd><%if !@funding.amount.nil?%><%= number_to_currency(@funding.amount, :unit => @funding.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<%end%></dd>
+<dt>∑ fundings</dt><dd><%if !@funding.granted.nil?%><%= number_to_currency(@funding.granted, :unit => @funding.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<%end%></dd>
+<dt>StartDate</dt><dd><%if !@funding.startdate.nil?%><%= @funding.startdate %><%else%>&nbsp;<%end%></dd>
+<dt>EndDate</dt><dd><%if !@funding.enddate.nil?%><%= @funding.enddate %><%else%>&nbsp;<%end%></dd>
+<dt>URL</dt><dd><%if !@funding.url.nil?%><%= link_to @funding.url, @funding.url %><%else%>&nbsp;<%end%></dd>
+</dl>
+
+<h3 class="head">Description</h3>
+<p class="clear"><%= @funding.description %></p>
+
+<h3 class="head">Keywords</h3>
+<p class="clear"><%= @funding.keywords %></p>
+
+<% if !@funding.classifications.empty? %>
+<h3 class="head">Classifications</h3>
+
+	<table class="table table-striped">
+	<% @funding.classifications.each do |classification| %>
+	<tr><td><%= link_to classification.term, classification %>{<i><%=classification.classscheme.description %></i>}</td>
+	<td><%if !current_user.nil?%><%= link_to image_tag("icons/delete.png"), deleteClass_funding_path(@funding, :classification_id => classification.id) %><%end%></td</tr>
+	<% end %>
+	</table>
+<% end %>
+
+<% if !@funding.fundings.empty? %>
+<h3 class="head">Fundings</h3>
+<table class="table table-striped">
+<%= render :partial => "fundings/header" %>
+<%= render :partial => "fundings/funding",
+	           :collection => @funding.fundings %>
+</table>
+<% end %>
+
+<% if !@funding.projects.empty? %>
+<h3 class="head">Projects</h3>
+<table class="table table-striped">
+<%= render :partial => "projects/header" %>
+<%= render :partial => "projects/project",
+	           :collection => @funding.projects %>
+</table>
+<% end %>
+
+<% if !@funding.people.empty? %>
+<h3 class="head">People</h3>
+<table class="table table-striped">
+<%= render :partial => "people/header" %>
+<%= render :partial => "people/person",
+	           :collection => @funding.people %>
+</table>
+<% end %>
+
+<% if !@funding.orgunits.empty? %>
+<h3 class="head">Orgunits</h3>
+<table class="table table-striped">
+<%= render :partial => "orgunits/header" %>
+<%= render :partial => "orgunits/orgunit",
+	           :collection => @funding.orgunits %>
+</table>
+<% end %>
+
+
+<p>created:<%= @funding.created_at %>, source:<%= link_to @funding.source.origid, @funding.source %></p>

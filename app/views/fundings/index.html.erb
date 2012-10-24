@@ -1,0 +1,16 @@
+<h3>Fundings</h3>
+<table class="table table-striped">
+<tr>
+  <th>Name</th>
+  <th>Amount</th>
+</tr>
+<% @fundings.each do |funding| %>
+	<tr>
+	  <td><%= link_to funding.name, funding %></td>
+	  <td><%= number_to_currency(funding.amount, :unit => funding.currency, :delimiter =>"." , :format => "%n %u")%></td>
+	</tr>
+<% end %>
+</table>
+<%if !@source.nil? %>
+<p><small> source:<%= link_to @source.origid, @source %></small></p>
+<% end %>

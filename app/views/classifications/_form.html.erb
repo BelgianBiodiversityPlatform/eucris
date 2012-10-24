@@ -1,0 +1,4 @@
+<%= form_for(@funding.classifications.create(:source_id => @funding.source_id)) do |f| %>
+<%= grouped_collection_select (:classification, :id, @classschemes, :classifications, :description, :id, :term) %>
+<%= f.submit %>
+<% end %>

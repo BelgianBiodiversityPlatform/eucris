@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Project:<%= @project.origid %></h3>
+
+<dl class="dl-horizontal">
+<dt>Title</dt><dd><%= @project.title %></dd>
+<dt>Acronym</dt><dd><%if !@project.acronym.nil?%><%= @project.acronym %><%else%>&nbsp;<% end %></dd>
+<dt>URL</dt><dd><%if !@project.url.nil?%><%= link_to @project.url, @project.url %><%else%>&nbsp;<% end %></dd>
+<dt>StartDate</dt><dd><%if !@project.startdate.nil?%><%= @project.startdate %><%else%>&nbsp;<% end %></dd>
+<dt>EndDate</dt><dd><%if !@project.enddate.nil?%><%= @project.enddate %><%else%>&nbsp;<% end %></dd>
+<dt>Amount</dt><dd><%if !@project.acronym.nil?%><%= number_to_currency(@project.amount, :unit => @project.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<% end %></dd>
+</dl>
+
+<h3>Abstract</h3>
+<div class="well">
+<p><%= sanitize @project.abstract %></p>
+</div>
+<h3>Keywords</h3>
+<p><%= @project.keywords %></p>
+
+<% if !@project.classifications.empty? %>
+<h3>Classifications</h3>
+<p><%= render :partial => "classifications/classification",
+	           :collection => @project.classifications %>
+</p>
+<% end %>
+
+<% if !@project.fundings.empty? %>
+<h3>Fundings</h3>
+<table class="table table-striped">
+<%= render :partial => "fundings/header" %>
+<%= render :partial => "fundings/funding",
+	           :collection => @project.fundings %>
+</table>
+<% end %>
+
+<% if !@project.people.empty? %>
+<h3>People</h3>
+<table class="table table-striped">
+<%= render :partial => "people/header" %>
+<%= render :partial => "people/person",
+	           :collection => @project.people %>
+</table>
+<% end %>
+
+<% if !@project.orgunits.empty? %>
+<h3>Orgunits</h3>
+<table class="table table-striped">
+<%= render :partial => "orgunits/header" %>
+<%= render :partial => "orgunits/orgunit",
+	           :collection => @project.orgunits %>
+</table>
+<% end %>
+
+<% if !@project.projects.empty? %>
+<h3>Collaborations</h3>
+<table class="table table-striped">
+<%= render :partial => "projects/header" %>
+<%= render :partial => "projects/project",
+	           :collection => @project.projects %>
+</table>
+<% end %>
+
+<% if !@project.publications.empty? %>
+<h3>Publications</h3>
+<table class="table table-striped">
+<%= render :partial => "publications/header" %>
+<%= render :partial => "publications/publication",
+	           :collection => @project.publications %>
+</table>
+<% end %>
+
+<p><small>created:<%= @project.created_at %>, source:<%= link_to @project.source.origid, @project.source %></small></p>

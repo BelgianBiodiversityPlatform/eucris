@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">    
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Cristal</title>
+<%= stylesheet_link_tag :all %>
+<%= javascript_include_tag :defaults %>
+<%= csrf_meta_tag %>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link href="favicon.ico" rel="shortcut icon" type="image/ico" />
+<link href="stylesheets/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/javascripts/cufon-yui.js"></script>
+<script type="text/javascript" src="/javascripts/maven.js"></script>
+<script type="text/javascript">
+    Cufon.replace('h1,h2,h3,h4,h5,#sltitles', { fontFamily: 'Maven Pro' });
+    Cufon.replace('#mainmenu ul.navlist li a', { 
+        fontFamily: 'Maven Pro',
+        hover: true
+    });
+</script>
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.cycle.lite.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#sltitles span').each(function() {
+        $(this).css({right: '0'});
+    });
+    $('#sltitles').cycle({
+        fx: 'fade',
+        speed: '100'
+    });
+});
+</script>
+<script language="javascript" type="text/javascript" src="/javascripts/jquery.accessible-news-slider.js"></script>
+<script language="javascript" type="text/javascript">
+    $(function() {
+        $( "#news-slider" ).accessNews({
+            speed : "normal",
+            slideBy : 2
+        });
+    });
+</script>
+</head>
+
+<body>
+<div id="page">
+    <div id="page-gradient"></div>
+    <div id="header">
+        <div id="gradient">
+            <div id="logo"><a href="index.php"><%= image_tag "logo.png"%></a></div>
+            <div id="quickmenu">
+                <ul class="navlist">
+                    <li><%= link_to (image_tag ("home.png"),  :controller =>'home', :action => 'index') %><%= link_to "Home", :controller =>'home', :action => 'index' %></li>
+                    <li><%= link_to (image_tag ("sitemap.png"),  :controller =>'home', :action => 'index') %><%= link_to "Sitemap", :controller =>'home', :action => 'index' %></li>
+                    <%if !current_user.nil? %><li><%= link_to current_user.login, user_path(current_user) %></li><%end%>
+                    <li><%if current_user.nil? %><%= link_to "login", signin_path %><%else%><%= link_to "logout", signout_path %><%end%></li>
+                </ul>
+            </div>
+            <div id="mainmenu">
+                <ul class="navlist">
+                    <li><%= link_to "Search", :controller =>'home', :action =>'index' %></li>
+                    <li><%= link_to "Countries", countries_path %></li>
+                    <li><%= link_to "Classifications", schemes_path %></li>
+                    <li><%= link_to "Sources", sources_path %></li>
+                    <li><%= link_to "Contact Us", :controller =>'home', :action =>'index' %></li>
+                </ul>
+            </div>
+        </div>
+        <div id="slidestatic">
+		<%= image_tag "slideshow-sub.jpg" %>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="front">
+		<%= yield %>
+         </div>
+    </div>
+</div>
+
+<div id="fblock">
+    <div id="footer">
+        <div class="footer-box">
+            <h6>Classifications</h6>
+            <ul>
+                <li><%= link_to "Ecosystems", scheme_path(6) %></li>
+                <li><%= link_to "EU Policies", scheme_path(7) %></li>
+                <li><%= link_to "Programme Characteristics", scheme_path(12) %></li>
+                <li><%= link_to "Research Areas", scheme_path(13) %></li>
+                <li><%= link_to "Main Type of Activity", scheme_path(18) %></li>
+            </ul>
+        </div>
+        <div class="footer-box">
+            <h6>Users</h6>
+            <ul>
+                <li><a href="#">Login</a></li>
+                <li><%= link_to "Register",  :controller =>'users', :action =>'new'  %></li>
+                <li><a href="#">Forgot Password?</a></li>
+            </ul>
+        </div>
+        <div class="footer-box">
+            <h6>Database</h6>
+            <ul>
+                <li><a href="#">Presentation</a></li>
+                <li><a href="#">Analysis</a></li>
+                <li><%= link_to "Dashboard", sources_path %></li>
+            </ul>
+        </div>
+        <div class="footer-box">
+            <h6>News</h6>
+            <ul>
+                <li><a href="#">BiodivERsA</a></li>
+                <li><a href="#">last release</a></li>
+                <li><a href="#">Other</a></li>
+            </ul>
+        </div>
+        <div class="footer-box footer-right">
+            <h6>FAQs</h6>
+            <ul>
+                <li><a href="#">FAQ1</a></li>
+                <li><a href="#">FAQ2</a></li>
+                <li><a href="#">FAQ3</a></li>
+                <li><a href="#">FAQ4</a></li>
+                <li><a href="#">FAQ5</a></li>
+            </ul>
+        </div>
+        <div class="footer-box copyright">
+            Copyright &copy; 2011 BiodivERsA, Belgian Biodiversity Platform<br />
+            <a href="http://www.julian.se">Web design by Julian</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

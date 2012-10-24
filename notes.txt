@@ -1,0 +1,8 @@
+#to start the rails server
+rails server
+
+# to start the solr server
+rake sunspot:solr:start
+
+# to stop the solr server
+rake sunspot:solr:stop

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Source:<%= @source.origid %></h3>
+<dl class="dl-horizontal">
+<dt>Name</dt><dd><%if !@source.name.nil?%><%= @source.name %><%else%>&nbsp;<%end%></dd>
+<dt>Country</dt><dd><%= @source.country.name %> (<%= @source.country.code %>)</dd>
+<dt>URL</dt><dd><%if !@source.url.nil?%><%= link_to @source.url, @source.url %><%else%>&nbsp;<%end%></dd>
+<dt>Fundings</dt><dd><%= link_to @source.fucount, fundings_path('source' => @source) %></dd>
+<dt>Projects</dt><dd><%= link_to @source.prcount, projects_path('source' => @source) %></dd>
+<dt>People</dt><dd><%= link_to @source.pecount, people_path('source' => @source) %></dd>
+<dt>Orgunits</dt><dd><%= link_to @source.oucount, orgunits_path('source' => @source) %></dd>
+</dl>
+<h3>Description</h3>
+<p><%= sanitize @source.description %></p>
+<p><small>created:<%= @source.created_at %>, updated:<%= @source.updated_at %> </small></p>
+
+<h3>Funding organizations (provided by this source)</h3>
+<table class="table table-striped">
+<tr>
+  <th>Name</th>
+</tr>
+<% @source.orgunits.each do |orgunit| %>
+<% if orgunit.isfunding? %>
+<tr>
+  <td><%= link_to orgunit.name, orgunit %></td>
+</tr>
+<% end %>
+<% end %>
+</table>

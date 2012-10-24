@@ -1,0 +1,28 @@
+
+<div class="well btn-group">
+<%= form_tag search_fundings_path, :method => :get do %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag "Search", :class => "btn btn-info" %>
+  <%= label_tag "narrow search to country:"%>
+  <%= select_tag "country", options_from_collection_for_select(@countries, "id", "name", params[:country]), :include_blank => true %>
+<% end %>
+</div>
+<p id="notice"><%= notice %></p>
+
+<%if !@fundings.empty? %>
+<h4>Funding Programmes</h4>
+<table class="table-striped">
+<tr>
+  <th>Country</th>
+  <th>Name</th>
+   <%if !params[:query].empty?%><th>Relevance</th><%end%>
+</tr>
+<% @fundings.each do |funding| %>
+	<tr>
+	  <td><%=funding.source.country.code %></td>
+	  <td><%= link_to funding.name, funding %></td>
+	  <%if !params[:query].empty?%><td><%= number_to_percentage(funding.rank, :precision => 2) %> </td><%end%>
+	</tr>
+<% end %>
+</table>
+<%end%>

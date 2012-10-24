@@ -1,0 +1,38 @@
+<div class="well btn-group">
+<%= form_tag search_projects_path, :method => :get do %>
+  <%= text_field_tag :query, params[:query] %>  
+  <%= submit_tag "Search", :class => "btn btn-info" %> 
+  <%= label_tag "narrow search to country:"%>
+  <%= select_tag "country", options_from_collection_for_select(@countries, "id", "name", params[:country]), :include_blank => true %>
+<% end %>
+</div>
+<p id="notice"><%= notice %></p>
+<% if !@projects.empty? %>
+
+<div class="row">
+<div class="span4">
+<h4>Research Projects</h4>
+</div>
+<%if !current_user.nil? %>
+<div class="span6">
+<%= form_tag download_projects_path, :method => :get do %>
+  <%= hidden_field_tag :query, params[:query] %>  
+  <%= submit_tag "Download", :class => "btn btn-success" %> 
+<% end %>
+</div>
+<%end%>
+</div>
+<table class="table-striped">
+<tr>
+  <th>Title</th>
+   <%if !params[:query].empty?%><th>Relevance</th><%end%>
+</tr>
+<% @projects.each do |project| %>
+<tr>
+  <td><%= link_to project.title, project %></td>
+   <%if !params[:query].empty?%><td><%= number_to_percentage(project.rank, :precision => 2) %></td><%end%>
+</tr>
+<% end %>
+</table>
+<%= paginate @projects %>
+<% end %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Person:<%= @person.origid %></h3>
+
+<dl class="dl-horizontal">
+<dt>Name</dt><dd><%= @person.familyname %>, <%= @person.firstname%></dd>
+<dt>URL</dt><dd><%if !@person.url.nil?%><%= link_to @person.url, @person.url %><%else%>&nbsp;<% end %></dd>
+</dl>
+
+<% if !@person.classifications.empty? %>
+<h3>Classifications</h3>
+<p>
+<%= render :partial => "classifications/classification",
+	           :collection => @person.classifications %>
+</p>
+<% end %>
+<% if !@person.projects.empty? %>
+<h3>Projects</h3>
+<table class="table table-striped">
+<%= render :partial => "projects/header" %>
+<%= render :partial => "projects/project",
+	           :collection => @person.projects %>
+</table>
+<% end %>
+
+<% if !@person.orgunits.empty? %>
+<h3>Orgunits</h3>
+<table class="table table-striped">
+<%= render :partial => "orgunits/header" %>
+<%= render :partial => "orgunits/orgunit",
+	           :collection => @person.orgunits %>
+</table>
+<% end %>
+
+<p><small>created:<%= @person.created_at %>, source:<%= link_to @person.source.origid, @person.source %></small></p>

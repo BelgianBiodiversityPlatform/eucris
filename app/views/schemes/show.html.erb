@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Classification Scheme:<%= @classscheme.origid %></h3>
+
+<dl class="dl-horizontal">
+<dt>Description</dt><dd><%= @classscheme.description %></dd>
+</dl>
+
+<% if @tag_cloud_hash != nil %>
+<div class="well">
+	<% @tag_cloud_hash.each_pair do |tag,size| %>
+	<%= link_to tag.term, classification_path(tag), :title => "#{tag.count} objects", :style => "font-size:#{size}px;" %>
+	<% end %>
+</div>
+<% end %>
+
+<h3>Classification terms</h3>
+<table class="table table-striped">
+	<tr>
+<th>ID</th>
+<th>Term</th>
+<th>Description</th>
+<th>Parent</th>
+</tr>
+<% @classscheme.classifications.each do |c| %>
+	<tr>
+	  <td><%= c.origid %></td>
+	<td><%= link_to  c.term, c %></td>
+	<td><%= c.description %></td>
+	<td><%if !c.parent.nil?%><%= c.parent.origid %><% end %></td>
+	</tr>
+<% end %>	
+</table>
+
+<p><small>created:<%= @classscheme.created_at %></small></p>
