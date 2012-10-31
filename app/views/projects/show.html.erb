@@ -8,7 +8,7 @@
 <dt>URL</dt><dd><%if !@project.url.nil?%><%= link_to @project.url, @project.url %><%else%>&nbsp;<% end %></dd>
 <dt>StartDate</dt><dd><%if !@project.startdate.nil?%><%= @project.startdate %><%else%>&nbsp;<% end %></dd>
 <dt>EndDate</dt><dd><%if !@project.enddate.nil?%><%= @project.enddate %><%else%>&nbsp;<% end %></dd>
-<dt>Amount</dt><dd><%if !@project.acronym.nil?%><%= number_to_currency(@project.amount, :unit => @project.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<% end %></dd>
+<dt>Amount</dt><dd><%if !@project.amount.nil?%><%= number_to_currency(@project.amount, :unit => @project.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<% end %></dd>
 </dl>
 
 <h3>Abstract</h3>

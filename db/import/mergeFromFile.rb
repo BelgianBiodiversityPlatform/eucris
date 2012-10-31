@@ -171,28 +171,28 @@ input= ARGV[4]
         puts "Merging Person #{from} into #{to}."
         checkPerson(from)
         checkPerson(to)
-        mergePerson(from,to)      
+#        mergePerson(from,to)      
       elsif what=='orgunit'
         puts "Merging Orgunit #{from} into #{to}."
         checkOrgunit(from)
         checkOrgunit(to)
-        mergeOrgunit(from,to)
-        puts "#{from} merged into #{to}."
+#        mergeOrgunit(from,to)
+#        puts "#{from} merged into #{to}."
       elsif what=='project'
         puts "Merging Project #{from} into #{to}."
         checkProject(from)
         checkProject(to)
-       mergeProject(from,to)
-        puts "#{from} merged into #{to}."
+#        mergeProject(from,to)
+#        puts "#{from} merged into #{to}."
       elsif what=='funding'
         puts "Merging Funding #{from} into #{to}."
         checkFunding(from)
         checkFunding(to)
-        mergeFunding(from,to)
-        puts "#{from} merged into #{to}."
+#        mergeFunding(from,to)
+#        puts "#{from} merged into #{to}."
+end
     } 
     
 
-  end
   
 @conn.close

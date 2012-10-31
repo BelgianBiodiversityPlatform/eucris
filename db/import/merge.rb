@@ -180,7 +180,7 @@ to= ARGV[5]
     puts "Merging Project #{from} into #{to}."
     checkProject(from)
     checkProject(to)
-   mergeProject(from,to)
+    mergeProject(from,to)
     puts "#{from} merged into #{to}."
   elsif what=='funding'
     puts "Merging Funding #{from} into #{to}."
