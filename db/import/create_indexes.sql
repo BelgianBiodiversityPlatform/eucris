@@ -62,7 +62,7 @@ update cl.fundings set granted=tmp.total, currency=tmp.currency
 		from (select funding_id, currency, sum(amount) as total from cl.project_funding where amount > 0 group by funding_id, currency) as tmp
 where id = tmp.funding_id;
 
-update cl.sources set  fucount=0,pecount=0, prcount=0, oucount=0;
+update cl.sources set  fucount=0,pecount=0, prcount=0, oucount=0, focount=0, rocount=0;
 
 update cl.sources source set fucount=tmp.count 
 	from (select source_id,count(*) as count from cl.fundings group by source_id) as tmp
@@ -75,6 +75,12 @@ update cl.sources source set pecount=tmp.count
 where source.id = tmp.source_id;
 update cl.sources source set oucount=tmp.count 
 	from (select source_id,count(*) as count from cl.orgunits group by source_id) as tmp
+where source.id = tmp.source_id;
+update cl.sources source set focount=tmp.count 
+	from (select source_id,count(*) as count from cl.orgunits where isFunding=true group by source_id) as tmp
+where source.id = tmp.source_id;
+update cl.sources source set rocount=tmp.count 
+	from (select source_id,count(*) as count from cl.orgunits where isFunding=false group by source_id) as tmp
 where source.id = tmp.source_id;
 
 update cl.sources source set count=fucount+prcount+pecount+oucount; 

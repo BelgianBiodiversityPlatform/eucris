@@ -1,13 +1,14 @@
 <h3>Orgunits</h3>
 
-
 <table class="table table-striped">
 <tr>
   <th>Name</th>
+  <th>Type</th>
 </tr>
 <% @orgunits.each do |orgunit| %>
 <tr>
   <td><%= link_to orgunit.name, orgunit %></td>
+  <td><%if orgunit.isfunding? %>funding<%else%>research<%end%></td>
 </tr>
 <% end %>
 </table>

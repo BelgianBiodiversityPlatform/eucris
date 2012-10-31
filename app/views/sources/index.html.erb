@@ -9,7 +9,8 @@
 
 <table class="table table-striped">  <tr>
     <th>Source</th>
-    <th>#Fundings</th>
+    <th>#Agencies</th>
+    <th>#Programmes</th>
     <th>#Projects</th>
     <th>#People</th>
     <th>#Orgunits</th>
@@ -19,10 +20,11 @@
 <% @sources.each do |source| %>
   <tr>
     <td><%= link_to source.origid, source %></td>
+    <td><%= link_to source.focount, orgunits_path('source' => source) %></td>
     <td><%= link_to source.fucount, fundings_path('source' => source) %></td>
     <td><%= link_to source.prcount, projects_path('source' => source) %></td>
     <td><%= link_to source.pecount, people_path('source' => source) %></td>
-    <td><%= link_to source.oucount, orgunits_path('source' => source) %></td>
+    <td><%= link_to source.rocount, orgunits_path('source' => source) %></td>
     <td><%=source.updated_at %></td>
   </tr>
 <% end %>

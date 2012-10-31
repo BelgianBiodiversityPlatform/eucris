@@ -188,8 +188,8 @@ input= ARGV[4]
         puts "Merging Funding #{from} into #{to}."
         checkFunding(from)
         checkFunding(to)
-#        mergeFunding(from,to)
-#        puts "#{from} merged into #{to}."
+        mergeFunding(from,to)
+        puts "#{from} merged into #{to}."
 end
     } 
     
