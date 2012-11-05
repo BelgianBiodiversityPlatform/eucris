@@ -17,6 +17,7 @@
   </div>
 <% end %>
 
-<%if !current_user.nil? %>
+<%if current_user.nil? %>
 <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+<p>Forgot password? <%= link_to "Reset your password!",request_new_password_path %></p>
 <%end%>

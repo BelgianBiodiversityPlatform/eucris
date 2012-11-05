@@ -23,18 +23,14 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    newPassword = @user.password
+    @countries = Country.order('name').all()
 
-    respond_to do |format|
-      if @user.save
-        format.html  { redirect_to(@user,
-                      :notice => 'User was successfully created.') }
-        format.json  { render :json => @user,
-                      :status => :created, :location => @user }
-      else
-        format.html  { render :action => "new" }
-        format.json  { render :json => @user.errors,
-                      :status => :unprocessable_entity }
-      end
+    if @user.save
+          UserMailer.registration_confirmation(@user,newPassword).deliver  
+          render 'registration_ok'
+    else
+        render 'new'
     end
   end
 
@@ -49,6 +45,41 @@ class UsersController < ApplicationController
      end
     
   end
+  
+  def activate_account
+    @user = User.find(params[:id])
+    if !@user.nil? && @user.update_attribute('activated', true) 
+      sign_in @user
+      flash[:notice] = "Registration completed. Welcome to BiodivERsA database."
+      render 'show'
+    else
+      flash[:notice] =  "Regsitration failed!"
+    end
+  end
+
+  def password_reset
+  end
+
+  def registration_ok
+  end
+
+  def request_new_password
+  end
+
+  def generate_and_send_new_password
+    @user = User.find_by_login(params[:user][:login])
+    if @user.nil?
+      flash.now[:error] = "Invalid login, please retry or contact us."
+      render 'request_new_password'
+    else
+      newPassword = (0...8).map{ ('a'..'z').to_a[rand(26)] }.join
+      @user.update_attributes(:password => newPassword)
+      UserMailer.new_password(@user, newPassword).deliver  
+      render 'password_reset'
+    end
+  end
+
+  
   def chooseSource
     @user = User.find(params[:id])
     if @user.sources.empty?

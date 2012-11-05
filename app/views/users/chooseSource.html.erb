@@ -2,5 +2,5 @@
 
 <%= form_for @user, :url => addSource_user_path(@user) do |f| %>
 <%= collection_select(:source, :id, @sources, :id, :origid) %>
-<%= f.submit %>
+<button class="submit" type="submit">Add source</button>
 <% end %>

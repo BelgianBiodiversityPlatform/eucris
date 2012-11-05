@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   attr_accessor :password
-  attr_accessible :login, :familyname, :firstname, :email, :password, :salt, :salted_password
+  attr_accessible :login, :familyname, :firstname, :email, :password, :salt, :salted_password, :activated
 
   has_and_belongs_to_many :sources, :join_table => "user_source"
   belongs_to :country
@@ -43,8 +43,16 @@ class User < ActiveRecord::Base
   private
 
   def encrypt_password
-    self.salt = make_salt unless has_password?(password)
-    self.salted_password = encrypt(password)
+#      self.salt = make_salt unless has_password?(password)
+#      self.salted_password = encrypt(password)
+    if (!self.activated or has_password?(password))
+        self.salt = make_salt
+    end
+    # encrypted_password attribute mustn't be updated on account activation because 
+    # no new password is being provided by the user. If it was, 
+    if !self.activated_changed?
+      self.salted_password = encrypt(password)
+    end
   end
 
   def encrypt(string)

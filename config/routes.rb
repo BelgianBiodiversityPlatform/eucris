@@ -61,6 +61,12 @@ Cristal::Application.routes.draw do
 
     resources :sessions, :only => [:new, :create, :destroy]
 
+    match '/activate_user_account',          :to => 'users#activate_account'
+    match '/request_new_password',           :to => 'users#request_new_password'
+    match '/password_reset',                 :to => 'users#password_reset'
+    match '/registration_ok',                :to => 'users#registration_ok'
+    match '/generate_and_send_new_password', :to => 'users#generate_and_send_new_password'
+
     match '/signup',  :to => 'users#new'
     match '/signin',  :to => 'sessions#new'
     match '/signout', :to => 'sessions#destroy'

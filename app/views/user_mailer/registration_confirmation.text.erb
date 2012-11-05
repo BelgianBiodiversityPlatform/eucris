@@ -1,0 +1,6 @@
+Dear <%= @user.fullname %>,
+
+Thank you for your registration to BiodivERsA database. Your password is : <%= @new_password %>
+Please follow this link to complete your regitration: <%= activate_user_account_url(:id => @user.id) %>
+
+Best regards,
