@@ -49,4 +49,36 @@ class UsersController < ApplicationController
      end
     
   end
+  def chooseSource
+    @user = User.find(params[:id])
+    if @user.sources.empty?
+      @sources= Source.order('origid').all()
+    else
+      @sources = Source.where(["id NOT IN (?)", @user.sources]).order('origid')
+    end
+    @source =Source.new
+
+    respond_to do |format|
+       format.html  # new.html.erb
+       format.json  { render :json => @source }
+     end
+  end
+  
+  def addSource
+    @user = User.find(params[:id])
+    @source = Source.find(params[:source][:id])
+    @user.sources<<@source
+
+    redirect_to user_path(@user)
+  end
+
+  def deleteSource
+    @user = User.find(params[:id])
+    @source = Source.find(params[:source_id])
+    @user.sources.delete(@source)
+
+    redirect_to user_path(@user)
+    
+  end
+  
 end

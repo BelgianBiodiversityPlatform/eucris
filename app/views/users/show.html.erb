@@ -6,16 +6,23 @@
 <dt>Familyname:</dt><dd><%= @user.familyname %></dd>
 <dt>Firstname:</dt><dd><%= @user.firstname %></dd>
 <dt>Login:</dt><dd><%= @user.login %></dd>
-<dt>StartDate:</dt><dd><%if !@user.startdate.nil? && !@user.startdate.empty? %><%= @user.startdate %><%else%>&nbsp;<%end%></dd>
-<dt>EndDate:</dt><dd><%if !@user.enddate.nil? && !@user.enddate.empty? %><%= @user.enddate %><%else%>&nbsp;<%end%></dd>
-<dt>URL:</dt><dd><%if !@user.url.nil? && !@user.url.empty? %><%= link_to @user.url, @user.url %><%else%>&nbsp;<% end %></dd>
+<dt>Country:</dt><dd><%if !@user.country.nil? %><%= link_to @user.country.name, @user.country %><%else%>&nbsp;<%end%></dd>
 </dl>
 
-<h3>Sources</h3>
-<% if !@user.sources.empty? %>
+<% if !@user.sources.empty? || !current_user.nil? %>
+<h3>Preferred Sources<%if !current_user.nil? && current_user == @user %><%= link_to image_tag("icons/add.png"), chooseSource_user_path(@user) %><%end%></h3>
 <table class="table table-striped">
-<%= render :partial => "sources/header" %>
-<%= render :partial => "sources/source",
-	           :collection => @user.sources %>
+	<tr>
+	<th>Name</th>
+	<th>Country</th>
+	<th>Actions</th>
+	</tr>
+<% @user.sources.each do |source| %>
+	<tr>
+	<td><%= link_to source.origid, source %></td>
+	<td><%=source.country.name%></td>
+	<td><%if !current_user.nil? && current_user == @user %><%= link_to image_tag("icons/delete.png"), deleteSource_user_path(@user, :source_id => source.id) %><%end%></td>
+	</tr>
+<% end %>
 </table>
 <% end %>

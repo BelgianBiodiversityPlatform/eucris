@@ -18,13 +18,15 @@ class SessionsController < ApplicationController
       # Sign the user in and redirect to the user's show page.
       sign_in user
 #      redirect_to flash[:return_to]
-    redirect_to search_path
+#    redirect_to search_path
+     redirect_to user_path(user)
     end
   end
 
   def destroy
     sign_out
-    redirect_to :back
+#    redirect_to :back
+  redirect_to root_path
   end
 
 end

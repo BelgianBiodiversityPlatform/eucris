@@ -1,0 +1,6 @@
+<h3>Select preferred Source for <%= @user.fullname %></h3>
+
+<%= form_for @user, :url => addSource_user_path(@user) do |f| %>
+<%= collection_select(:source, :id, @sources, :id, :origid) %>
+<%= f.submit %>
+<% end %>

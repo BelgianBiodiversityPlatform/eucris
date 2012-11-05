@@ -39,11 +39,6 @@ Cristal::Application.routes.draw do
          get 'search'
          get 'download'
       end
-      member do
-        get 'deleteClass'
-        get 'chooseClass'
-        put 'addClass'
-      end
      end
     
      # Sample resource route (maps HTTP verbs to controller actions automatically):
@@ -53,7 +48,17 @@ Cristal::Application.routes.draw do
     resources :schemes 
 
 
-    resources :users
+    resources :users do
+      resources :sources
+      member do
+        get 'deleteSource'
+        get 'chooseSource'
+        put 'addSource'
+      end
+     end
+
+
+
     resources :sessions, :only => [:new, :create, :destroy]
 
     match '/signup',  :to => 'users#new'
