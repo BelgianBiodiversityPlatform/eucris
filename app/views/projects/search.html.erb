@@ -17,6 +17,7 @@
 <div class="span6">
 <%= form_tag download_projects_path, :method => :get do %>
   <%= hidden_field_tag :query, params[:query] %>  
+  <%= hidden_field_tag :country, params[:country] %>  
   <%= submit_tag "Download", :class => "btn btn-success" %> 
 <% end %>
 </div>

@@ -22,7 +22,6 @@
 	<table class="table table-striped">
 	<% @funding.classifications.each do |classification| %>
 	<tr><td><%= link_to classification.term, classification %>{<i><%=classification.classscheme.description %></i>}</td>
-	<td><%if !current_user.nil?%><%= link_to image_tag("icons/delete.png"), deleteClass_funding_path(@funding, :classification_id => classification.id) %><%end%></td</tr>
 	<% end %>
 	</table>
 <% end %>

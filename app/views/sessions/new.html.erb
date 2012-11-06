@@ -1,7 +1,5 @@
 <h1><%=@title%></h1>
-<% if flash[:error] %>
-<p class="error"><%= flash[:error] %></p>
-<% end %>
+<% if flash[:error] %><p class="error"><%= flash[:error] %></p><% end %>
 <%= form_for(:session, :url => sessions_path) do |f| %>
 
   <div class="field">

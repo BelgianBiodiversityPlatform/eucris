@@ -32,29 +32,26 @@ class ProjectsController < ApplicationController
     
     if params.has_key?('country') && !params[:country].empty?
       if params[:query].empty?
-        @results = Project.find(:all,
-            :select => 'projects.* ',
-            :from => 'cl.projects', 
-            :joins => ' left join cl.sources on sources.id = projects.source_id left join cl.countries on countries.id=sources.country_id',
-            :conditions => 'sources.country_id =' + params[:country],
-            :order =>'title')
+        @results= Project.
+          select('p.id, p.title').from('cl.projects p').
+          joins(' left join cl.sources s on s.id = p.source_id left join cl.countries c on c.id=s.country_id').
+          where("s.country_id=?", params[:country]).
+          order('title')
       else
-        @results= Project.find(:all, 
-            :select => 'projects.*, 100.0 * ts_rank(ts_index_col, query) AS rank ', 
-            :from => ts_query(params[:query], 'cl.projects'), 
-            :joins => ' left join cl.sources on sources.id = projects.source_id left join cl.countries on countries.id=sources.country_id',
-            :conditions => 'query @@ ts_index_col and sources.country_id=' + params[:country],
-            :order => 'rank DESC, title')
+        @results= Project.
+          select('p.id, p.title, 100.0 * ts_rank(ts_index_col, query) AS rank ').from(ts_query(params[:query], 'cl.projects p')).
+          joins(' left join cl.sources s on s.id = p.source_id left join cl.countries c on c.id=s.country_id').
+          where("query @@ ts_index_col and s.country_id=?", params[:country]).
+          order('rank DESC, title')
       end
     else
       if params[:query].empty?
-          @results = Project.find(:all, :limit =>100, :order =>'title')
+          @results = Project.select('id, title').order('title').all()
       else
-          @results= Project.find(:all, 
-            :select => 'id, origid, title, 100.0 * ts_rank(ts_index_col, query) AS rank ', 
-            :from => ts_query(params[:query], 'cl.projects'), 
-            :conditions => 'query @@ ts_index_col',
-            :order => 'rank DESC, title')
+          @results= Project. 
+          select('p.id, p.title, 100.0 * ts_rank(ts_index_col, query) AS rank ').from(ts_query(params[:query], 'cl.projects p')).
+          where("query @@ ts_index_col").
+          order('rank DESC, title')
       end
     end
 
@@ -67,39 +64,24 @@ class ProjectsController < ApplicationController
     end
   end
 
-#  before_filter :login_required
   def download()
+    sqlFields1='p.origid, p.title, p.startdate, p.enddate,  p.amount, coalesce (p.currency, pf.currency) as currency, pf.amount as funds, s.origid as from, c.code as country, 0 AS rank'
+    sqlFields2='p.origid, p.title, p.startdate, p.enddate,  p.amount, coalesce (p.currency, pf.currency) as currency, pf.amount as funds, s.origid as from, c.code as country, ts_rank(ts_index_col, query) AS rank'
+    sqlJoins='left join cl.sources as s on s.id=p.source_id left join cl.countries as c on c.id=s.country_id left join cl.project_funding as pf on pf.project_id=p.id'
 
     if params.has_key?('country') && !params[:country].empty?
       if params[:query].empty?
-        @results = Project.find(:all,
-        :select => 'p.origid, p.title, p.startdate, p.enddate, 0 AS rank, s.origid as from, c.code as country ', 
-        :from => 'cl.projects ', 
-        :joins =>'as p left join cl.sources as s on s.id=p.source_id left join cl.countries as c on c.id=s.country_id',
-        :conditions => 'sources.country_id =' + params[:country],
-        :order => 'title')    
+        @results= Project.select(sqlFields1).from('cl.projects p').joins(sqlJoins).where("s.country_id=?", params[:country]).order('title')
       else
-        @results= Project.find(:all, 
-        :select => 'p.origid, p.title, p.startdate, p.enddate, pf.amount, pf.currency, ts_rank(ts_index_col, query) AS rank, s.origid as from, c.code as country ', 
-        :from => ts_query(params[:query], 'cl.projects'), 
-        :joins =>'as p left join cl.sources as s on s.id=p.source_id left join cl.countries as c on c.id=s.country_id left join cl.project_funding as pf on pf.project_id=p.id',
-        :conditions => 'query @@ ts_index_col and sources.country_id='+ params[:country],
-        :order => 'rank DESC, title')    
+        @results=Project.select(sqlFields2).from(ts_query(params[:query], 'cl.projects p')).
+        joins(sqlJoins).where("query @@ ts_index_col and s.country_id=?", params[:country]).order('rank DESC, title')
       end
     else
       if params[:query].empty?
-        @results = Project.find(:all,
-        :select => 'p.id, p.origid, p.title, p.startdate, p.enddate, 0 AS rank, s.origid as from, c.code as country ', 
-        :from => 'cl.projects ', 
-        :joins =>'as p left join cl.sources as s on s.id=p.source_id left join cl.countries as c on c.id=s.country_id',
-        :order => 'title')    
+        @results = Project.select(sqlFields1).from('cl.projects p').joins(sqlJoins).order('title').all()
       else
-        @results= Project.find(:all, 
-        :select => 'p.id, p.origid, p.title, p.startdate, p.enddate, pf.amount, pf.currency, ts_rank(ts_index_col, query) AS rank, s.origid as from, c.code as country ', 
-        :from => ts_query(params[:query], 'cl.projects'), 
-        :joins =>'as p left join cl.sources as s on s.id=p.source_id left join cl.countries as c on c.id=s.country_id left join cl.project_funding as pf on pf.project_id=p.id',
-        :conditions => 'query @@ ts_index_col',
-        :order => 'rank DESC, title')    
+        @results= Project.select(sqlFields2).from(ts_query(params[:query], 'cl.projects p')).
+        joins(sqlJoins).where("query @@ ts_index_col").order('rank DESC, title')
       end
     end
 
@@ -113,6 +95,7 @@ class ProjectsController < ApplicationController
             "StartDate",
             "EndDate",
             "Amount",
+            "Funds",
             "Currency",
             "Source",
             "Country",
@@ -126,6 +109,7 @@ class ProjectsController < ApplicationController
                 project.startdate,
                 project.enddate,
                 project.amount,
+                project.funds,
                 project.currency,
                 project.from,
                 project.country,

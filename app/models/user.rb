@@ -33,8 +33,9 @@ class User < ActiveRecord::Base
 
   def self.authenticate(login, submitted_password)
     user = find_by_login(login)
-    return nil  if user.nil?
-    return user if user.has_password?(submitted_password)
+    return nil  if user.nil? || !user.activated? || !user.has_password?(submitted_password)
+    user.password= submitted_password
+    return user
   end
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
@@ -45,12 +46,8 @@ class User < ActiveRecord::Base
   def encrypt_password
 #      self.salt = make_salt unless has_password?(password)
 #      self.salted_password = encrypt(password)
-    if (!self.activated or has_password?(password))
-        self.salt = make_salt
-    end
-    # encrypted_password attribute mustn't be updated on account activation because 
-    # no new password is being provided by the user. If it was, 
-    if !self.activated_changed?
+    if (!self.activated_changed?  && !has_password?(password))
+      self.salt = make_salt
       self.salted_password = encrypt(password)
     end
   end

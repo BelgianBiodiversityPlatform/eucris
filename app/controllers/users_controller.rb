@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :authorize, :only => [:addSource, :deleteSource]
+
   # GET /users
   # GET /users.xml
   def index
@@ -48,12 +50,12 @@ class UsersController < ApplicationController
   
   def activate_account
     @user = User.find(params[:id])
-    if !@user.nil? && @user.update_attribute('activated', true) 
-      sign_in @user
-      flash[:notice] = "Registration completed. Welcome to BiodivERsA database."
-      render 'show'
+    if !@user.nil? && !@user.activated? && @user.update_attribute('activated', true) 
+      flash[:error] = "Registration completed, please login."
+      render 'sessions/new'
     else
-      flash[:notice] =  "Regsitration failed!"
+      flash[:error] =  "User activation failed. Please contact us"
+      render 'activation_failed'
     end
   end
 
@@ -75,7 +77,8 @@ class UsersController < ApplicationController
       newPassword = (0...8).map{ ('a'..'z').to_a[rand(26)] }.join
       @user.update_attributes(:password => newPassword)
       UserMailer.new_password(@user, newPassword).deliver  
-      render 'password_reset'
+      flash[:error] = "A new password has been sent to your mailbox."
+      render 'sessions/new'
     end
   end
 

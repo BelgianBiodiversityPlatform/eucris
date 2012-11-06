@@ -3,6 +3,8 @@ require 'fastercsv'
 class FundingsController < ApplicationController
   # GET /fundings
   # GET /fundings.xml
+  before_filter :authorize, :only => [:addClass, :deleteClass]
+
   def index
     if params.has_key?('source')
       @source = Source.find(params[:source])
@@ -46,41 +48,6 @@ class FundingsController < ApplicationController
      end
   end
   
-  def addClass
-    @funding = Funding.find(params[:id])
-    @class = Classification.find(params[:classification][:id])
-    @funding.classifications<< @class 
-
-    redirect_to funding_path(@funding)
-  end
-  def deleteClass
-    @funding = Funding.find(params[:id])
-    @class = Classification.find(params[:classification_id])
-    @funding.classifications.delete(@class)
-
-    redirect_to funding_path(@funding)
-    
-  end
-  def edit
-    @funding = Funding.find(params[:id])
-  end
-
-
-  def update
-    @funding = Funding.find(params[:id])
-
-    respond_to do |format|
-      if @funding.update_attributes(params[:funding])
-        format.html  { redirect_to(@funding,
-                      :notice => 'Funding was successfully updated.') }
-        format.json  { head :no_content }
-      else
-        format.html  { render :action => "edit" }
-        format.json  { render :json => @funding.errors,
-                      :status => :unprocessable_entity }
-      end
-    end
-  end
 
   # GET /fundings/search
   # GET /fundings/search.xml
