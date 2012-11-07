@@ -48,12 +48,9 @@
 </table>
 <% end %>
 <HR>
-<% if @country.rocount > 0 %>
-<h3><%= link_to "Research Orgunits", search_orgunits_path(:query => "", :scope =>"research", :country =>@country) %></h3>
-<% end %>
-<% if @country.prcount > 0 %>
-<h3><%= link_to "Projects", search_projects_path(:query => "", :country =>@country) %></h3>
-<% end %>
-<% if @country.pecount > 0 %>
-<h3><%= link_to "People", search_people_path(:query => "", :country =>@country) %></h3>
-<% end %>
+<h3>Other data</h3>
+<ul>
+<li><%= link_to 'Projects', search_projects_path(:query => "", :country =>@country) %> (<%=@country.prcount%>)</li>
+<li><%= link_to 'People', search_people_path(:query => "", :country =>@country) %> (<%=@country.pecount%>)</li>
+<li><%= link_to 'Research Orgunits', search_orgunits_path(:query => "", :scope =>"research", :country =>@country) %> (<%=@country.rocount%>)</li>
+<ul>
