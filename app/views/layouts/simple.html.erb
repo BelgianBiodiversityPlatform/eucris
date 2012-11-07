@@ -6,12 +6,13 @@
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
-<body data-offset="50">
+<body>
 <!-- Navbar ================================================== -->
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
+<div class="navbar">
+  <div class="navbar-inner navbar-fixed-top">
     <div class="container">
-	<%= link_to 'BiodivERsA database', root_path, :class => 'brand' %>
+	<div id="logo"><%= link_to image_tag("biodiversa.png"), 'http://www.biodiversa.org' %></div>
+	<%= link_to 'Database', root_path, :class => 'brand' %>
 	<ul class="nav">
 		<li><%= link_to 'About', about_path %></li>
 		<li><%= link_to 'Search', search_path %></li>
