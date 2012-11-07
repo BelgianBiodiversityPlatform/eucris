@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   attr_accessor :password
-  attr_accessible :login, :familyname, :firstname, :email, :password, :salt, :salted_password, :activated
+  attr_accessible :login, :familyname, :firstname, :email, :password, :salt, :salted_password, :activated, :institution, :purpose, :country_id
 
   has_and_belongs_to_many :sources, :join_table => "user_source"
   belongs_to :country
