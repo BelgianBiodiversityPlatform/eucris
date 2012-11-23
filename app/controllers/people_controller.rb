@@ -4,9 +4,13 @@ class PeopleController < ApplicationController
     # GET /people
     # GET /people.xml
     def index
-      @source = Source.find(params[:source])
-      @people= @source.people
-
+      if params.has_key?('source')
+        @source = Source.find(params[:source])
+        @results= @source.people
+      else
+        @results= Person.order('familyname, firstname').all()
+      end
+      @people=Kaminari.paginate_array(@results).page params[:page]
       respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @people }

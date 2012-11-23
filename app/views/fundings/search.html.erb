@@ -10,7 +10,7 @@
 <p id="notice"><%= notice %></p>
 
 <%if !@fundings.empty? %>
-<h4>Funding Programmes</h4>
+<h4>Funding Programmes (<%=@fundings.size%>/<%=@results.size%>)</h4>
 <table class="table-striped">
 <tr>
   <th>Country</th>
@@ -25,4 +25,5 @@
 	</tr>
 <% end %>
 </table>
+<%= paginate @fundings %>
 <%end%>

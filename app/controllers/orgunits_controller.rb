@@ -4,9 +4,13 @@ class OrgunitsController < ApplicationController
     # GET /orgunits
     # GET /orgunits.xml
     def index
-      @source = Source.find(params[:source])
-      @orgunits= @source.orgunits
-
+      if params.has_key?('source')
+        @source = Source.find(params[:source])
+        @results= @source.orgunits
+      else
+        @results=Orgunit.order('name').all()
+      end
+      @orgunits=Kaminari.paginate_array(@results).page params[:page]
       respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @orgunits }

@@ -5,8 +5,13 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @source = Source.find(params[:source])
-    @projects= @source.projects
+    if params.has_key?('source')
+      @source = Source.find(params[:source])
+      @results= @source.projects
+    else
+      @results = Project.order('title').all()
+    end
+    @projects=Kaminari.paginate_array(@results).page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

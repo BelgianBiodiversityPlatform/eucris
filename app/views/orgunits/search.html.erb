@@ -10,7 +10,7 @@
 </div>
 <p id="notice"><%= notice %></p>
 <%if !@orgunits.empty? %>
-<h3><%= params[:scope] %> Orgunits</h3>
+<h3><%= params[:scope] %> Orgunits (<%=@orgunits.size%>/<%=@results.size%>)</h3>
 <table class="table table-striped">
 <tr>
   <th>Name</th>

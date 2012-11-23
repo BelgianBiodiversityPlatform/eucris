@@ -1,4 +1,4 @@
-<h3>Orgunits</h3>
+<h3>Orgunits (<%=@orgunits.size%>/<%=@results.size%>)</h3>
 
 <table class="table table-striped">
 <tr>
@@ -12,4 +12,7 @@
 </tr>
 <% end %>
 </table>
+<%= paginate @orgunits %>
+<%if !@source.nil? %>
 <p><small> source:<%= link_to @source.origid, @source %></small></p>
+<% end %>

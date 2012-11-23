@@ -8,17 +8,19 @@ class FundingsController < ApplicationController
   def index
     if params.has_key?('source')
       @source = Source.find(params[:source])
-      @fundings= @source.fundings
+      @results= @source.fundings
     elsif params.has_key?('country')
         @country = Country.find(params[:country])
         @sources = @country.sources
-        @fundings = Array.new
+        @results = Array.new
         @sources.each do |source|
-          @fundings += source.fundings
+          @results += source.fundings
         end 
     else
-      @fundings = Funding.order('origid').all()
+      @results = Funding.order('origid').all()
     end
+
+    @fundings=Kaminari.paginate_array(@results).page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

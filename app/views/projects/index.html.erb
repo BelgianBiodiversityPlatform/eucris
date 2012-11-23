@@ -1,4 +1,4 @@
-<h3>Projects</h3>
+<h3>Projects (<%=@projects.size%>/<%=@results.size%>)</h3>
 <table class="table table-striped">
 <tr>
   <th>Title</th>
@@ -9,4 +9,7 @@
 </tr>
 <% end %>
 </table>
+<%= paginate @projects %>
+<%if !@source.nil? %>
 <p><small> source:<%= link_to @source.origid, @source %></small></p>
+<% end %>
