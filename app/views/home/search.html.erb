@@ -1,7 +1,7 @@
 <h2>Enter a search term to discover...</p>
 
 <div class="row">
-  <div class="span5">
+  <div class="span5 offset1">
     <%= form_tag search_fundings_path, :method => :get, :class => "well form_search" do %>
       <h4>Funding Programmes</h4>
       <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %>  <%= submit_tag "Search", :class => "btn btn-info" %> 
@@ -16,7 +16,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="span5">
+  <div class="span5 offset1">
 	<%= form_tag search_projects_path, :method => :get, :class => "well form_search" do %>
 	  <h4>Projects</h4>
 	  <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %> <%= submit_tag "Search", :class => "btn btn-info" %> 
@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="span5">
+  <div class="span5 offset1">
 	<%= form_tag search_people_path, :method => :get, :class => "well form_search" do %>
 	  <h4>People</h4>
 	  <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %> <%= submit_tag "Search", :class => "btn btn-info" %> 
