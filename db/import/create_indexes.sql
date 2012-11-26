@@ -207,10 +207,10 @@ UPDATE cl.fundings SET ts_index_col =
 	setweight(to_tsvector( 'english', coalesce(name,'')), 'A') ||
 	setweight(to_tsvector( 'english', coalesce(keywords,'')), 'B') ||
 	setweight(to_tsvector( 'english', coalesce(description,'')), 'B') ||
-	setweight(to_tsvector( 'english', coalesce(tmp.fcterms,'')), 'B')
+	setweight(to_tsvector( 'english', coalesce(tmp.fcterms,'')), 'B') ||
 	setweight(to_tsvector( 'english', coalesce(tmp.prtitles,'')), 'C') ||
 	setweight(to_tsvector( 'english', coalesce(tmp.prkeywords,'')), 'C') ||
-	setweight(to_tsvector( 'english', coalesce(tmp.ofnames,'')), 'D') ||
+	setweight(to_tsvector( 'english', coalesce(tmp.ofnames,'')), 'D') 
 	from (select f.funding_id, fc.fcterms, pr.prtitles, pr.prkeywords, of.ofnames
 			from (select id as funding_id from cl.fundings) as f
 			left join (select fc.funding_id, array_accum(c.term)::text as fcterms from cl.funding_class fc 
