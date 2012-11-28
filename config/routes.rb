@@ -22,6 +22,7 @@ Cristal::Application.routes.draw do
    resources :orgunits  do
        collection do
          get 'search'
+         get 'download'
        end
      end
      

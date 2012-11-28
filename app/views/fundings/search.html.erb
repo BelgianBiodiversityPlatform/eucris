@@ -8,9 +8,12 @@
 <% end %>
 </div>
 <p id="notice"><%= notice %></p>
-
 <%if !@fundings.empty? %>
-<h4>Funding Programmes (<%=@fundings.size%>/<%=@results.size%>)</h4>
+
+<h4>Funding Programmes (<%=@fundings.size%>/<%=@results.size%>) 
+<%if !current_user.nil? %><%= link_to image_tag("icons/download.png", :title => "Download results"), download_fundings_path(:country => params[:country], :query => params[:query]) %><%end%>
+</h4>
+
 <table class="table-striped">
 <tr>
   <th>Country</th>

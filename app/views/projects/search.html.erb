@@ -9,20 +9,10 @@
 <p id="notice"><%= notice %></p>
 <% if !@projects.empty? %>
 
-<div class="row">
-<div class="span4">
-<h4>Research Projects (<%=@projects.size%>/<%=@results.size%>)</h4>
-</div>
-<%if !current_user.nil? %>
-<div class="span6">
-<%= form_tag download_projects_path, :method => :get do %>
-  <%= hidden_field_tag :query, params[:query] %>  
-  <%= hidden_field_tag :country, params[:country] %>  
-  <%= submit_tag "Download", :class => "btn btn-success" %> 
-<% end %>
-</div>
-<%end%>
-</div>
+<h4>Projects (<%=@projects.size%>/<%=@results.size%>) 
+<%if !current_user.nil? %><%= link_to image_tag("icons/download.png", :title => "Download results"), download_projects_path(:country => params[:country], :query => params[:query]) %><%end%>
+</h4>
+
 <table class="table-striped">
 <tr>
   <th>Title</th>

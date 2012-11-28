@@ -10,7 +10,11 @@
 </div>
 <p id="notice"><%= notice %></p>
 <%if !@orgunits.empty? %>
-<h3><%= params[:scope] %> Orgunits (<%=@orgunits.size%>/<%=@results.size%>)</h3>
+
+<h4><%= params[:scope].capitalize %> Orgunits (<%=@orgunits.size%>/<%=@results.size%>) 
+<%if !current_user.nil? %><%= link_to image_tag("icons/download.png", :title => "Download results"), download_orgunits_path(:country => params[:country], :query => params[:query], :scope => params[:scope]) %><%end%>
+</h4>
+
 <table class="table table-striped">
 <tr>
   <th>Name</th>

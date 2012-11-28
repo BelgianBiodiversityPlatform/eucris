@@ -70,8 +70,8 @@ class ProjectsController < ApplicationController
   end
 
   def download()
-    sqlFields1='p.origid, p.title, p.startdate, p.enddate,  p.amount, coalesce (p.currency, pf.currency) as currency, pf.amount as funds, s.origid as from, c.code as country, 0 AS rank'
-    sqlFields2='p.origid, p.title, p.startdate, p.enddate,  p.amount, coalesce (p.currency, pf.currency) as currency, pf.amount as funds, s.origid as from, c.code as country, ts_rank(ts_index_col, query) AS rank'
+    sqlFields1='p.id, p.origid, p.title, p.startdate, p.enddate,  p.amount, coalesce (p.currency, pf.currency) as currency, pf.amount as funds, s.origid as from, c.code as country, 0 AS rank'
+    sqlFields2='p.id, p.origid, p.title, p.startdate, p.enddate,  p.amount, coalesce (p.currency, pf.currency) as currency, pf.amount as funds, s.origid as from, c.code as country, ts_rank(ts_index_col, query) AS rank'
     sqlJoins='left join cl.sources as s on s.id=p.source_id left join cl.countries as c on c.id=s.country_id left join cl.project_funding as pf on pf.project_id=p.id'
 
     if params.has_key?('country') && !params[:country].empty?
@@ -91,6 +91,7 @@ class ProjectsController < ApplicationController
     end
 
         @csvpath= 'Projects' + Time.now.strftime("%Y-%m-%d") + '.csv' 
+        @signature= "from BiodivERsA database http://data.biodiversa.org on "
 
         csv_data = CSV.generate(:col_sep => "\t", :encoding => "UTF-8" ) do |csv|
             csv << [
@@ -104,7 +105,7 @@ class ProjectsController < ApplicationController
             "Currency",
             "Source",
             "Country",
-            "Relevance("+params[:query]+") from BiodivERsA database "+Time.now.to_s()
+            "Relevance("+params[:query]+") "+@signature+Time.now.to_s()
             ]
             @results.each do |project|
               csv << [
@@ -123,11 +124,11 @@ class ProjectsController < ApplicationController
             end
         end
         send_data csv_data,
+        # :type => 'text/csv; charset=iso-8859-1; header=present',
           :type => "text/csv; charset=UTF-8; header=present",
           :disposition => "attachment; filename=#{@csvpath}"
-#            :type => 'text/csv; charset=iso-8859-1; header=present',
 
-      flash[:notice] = "Export complete!"
+      flash[:notice] = "Download complete!"
     
   end
 end

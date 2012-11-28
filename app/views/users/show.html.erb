@@ -10,7 +10,7 @@
 </dl>
 
 <% if !@user.sources.empty? || !current_user.nil? %>
-<h3>Preferred Sources<%if !current_user.nil? && current_user == @user %><%= link_to image_tag("icons/add.png"), chooseSource_user_path(@user) %><%end%></h3>
+<h3>Preferred Sources<%if !current_user.nil? && current_user == @user %><%= link_to image_tag("icons/add.png", :title => "Add preference"), chooseSource_user_path(@user) %><%end%></h3>
 <table class="table table-striped">
 	<tr>
 	<th>Name</th>
@@ -21,7 +21,7 @@
 	<tr>
 	<td><%= link_to source.origid, source %></td>
 	<td><%=source.country.name%></td>
-	<td><%if !current_user.nil? && current_user == @user %><%= link_to image_tag("icons/delete.png"), deleteSource_user_path(@user, :source_id => source.id) %><%end%></td>
+	<td><%if !current_user.nil? && current_user == @user %><%= link_to image_tag("icons/delete.png", :title => "Delete preference"), deleteSource_user_path(@user, :source_id => source.id) %><%end%></td>
 	</tr>
 <% end %>
 </table>

@@ -1,4 +1,5 @@
-require 'fastercsv'
+require 'kaminari'
+require 'csv'
 
 class FundingsController < ApplicationController
   # GET /fundings
@@ -94,59 +95,65 @@ class FundingsController < ApplicationController
           end
   end
   
-#  before_filter :login_required
   def download()
-    if params[:query].empty? 
-      @fundings= Funding.find(:all, 
-        :select => 'f.origid, f.name, f.startdate, f.endate, f.amount, f.currency, 0 AS rank, s.origid as from, c.code as country', 
-        :from => 'cl.fundings ', 
-        :joins =>'as f left join cl.sources as s on s.id=f.source_id left join cl.countries as c on c.id=s.country_id ',
-        :order => 'name')    
+    sqlFields1='f.id, f.origid, f.name, f.startdate, f.enddate, f.amount, f.granted, f.currency, 0 AS rank, s.origid as from, c.code as country'
+    sqlFields2='f.id, f.origid, f.name, f.startdate, f.enddate, f.amount, f.granted, f.currency, ts_rank(ts_index_col, query) AS rank, s.origid as from, c.code as country '
+    sqlJoins=' left join cl.sources as s on s.id=f.source_id left join cl.countries as c on c.id=s.country_id'
 
+    if params.has_key?('country') && !params[:country].empty?
+      if params[:query].empty?
+        @results= Funding.select(sqlFields1).from('cl.fundings f ').joins(sqlJoins).where("s.country_id=?", params[:country]).order('name')
+      else
+        @results=Funding.select(sqlFields2).from(ts_query(params[:query], 'cl.fundings f')).
+          joins(sqlJoins).where("query @@ ts_index_col and s.country_id=?", params[:country]).order('rank DESC, name')
+      end
     else
-      @fundings= Funding.find(:all, 
-        :select => 'f.origid, f.name, f.startdate, f.endate, f.amount, f.currency, ts_rank(ts_index_col, query) AS rank, s.origid as from, c.code as country ', 
-        :from => 'to_tsquery(\''+ params[:query] +'\') query, cl.fundings ', 
-        :conditions => 'query @@ ts_index_col' , 
-        :joins =>'as f left join cl.sources as s on s.id=f.source_id left join cl.countries as c on c.id=s.country_id',
-        :order => 'rank DESC')    
+      if params[:query].empty?
+        @results= Funding.select(sqlFields1).from('cl.fundings f').joins(sqlJoins).order('name')
+      else
+        @results=Funding.select(sqlFields2).from(ts_query(params[:query], 'cl.fundings f')).
+          joins(sqlJoins).where("query @@ ts_index_col").order('rank DESC, name')
+      end
     end
 
-    @csvpath= 'Fundings' + Time.now.strftime("%Y-%m-%d")  + '.csv' 
-
-    csv_data = FasterCSV.generate(:col_sep => "\t", :encoding => "UTF-8" ) do |csv|
-        csv << [
-        "origid",
-        "Name",
-        "StartDate",
-        "EndDate",
-        "Amount",
-        "Currency",
-        "Source",
-        "Country",
-        "Relevance("+params[:query]+") from Biodiversa database "+Time.now.to_s()
-        ]
-        @fundings.each do |funding|
-          csv << [
-            funding.origid,
-            funding.name,
-            funding.startdate,
-            funding.endate,
-            funding.amount,
-            funding.currency,
-            funding.from,
-            funding.country,
-            funding.rank
+        @csvpath= 'Fundings' + Time.now.strftime("%Y-%m-%d") + '.csv' 
+        @signature= "from BiodivERsA database http://data.biodiversa.org on "
+        csv_data = CSV.generate(:col_sep => "\t", :encoding => "UTF-8" ) do |csv|
+            csv << [
+            "id",
+            "origid",
+            "Name",
+            "StartDate",
+            "EndDate",
+            "Amount",
+            "Funds",
+            "Currency",
+            "Source",
+            "Country",
+            "Relevance("+params[:query]+") "+@signature+Time.now.to_s()
             ]
+            @results.each do |funding|
+              csv << [
+                funding.id,
+                funding.origid,
+                funding.name,
+                funding.startdate,
+                funding.enddate,
+                funding.amount,
+                funding.granted,
+                funding.currency,
+                funding.from,
+                funding.country,
+                funding.rank
+                ]
+            end
         end
+        send_data csv_data,
+        # :type => 'text/csv; charset=iso-8859-1; header=present',
+          :type => "text/csv; charset=UTF-8; header=present",
+          :disposition => "attachment; filename=#{@csvpath}"
+
+        flash[:notice] = "Download complete!"
     end
-    send_data csv_data,
-      :type => "text/csv; charset=UTF-8; header=present",
-      :disposition => "attachment; filename=#{@csvpath}"
-#        :type => 'text/csv; charset=iso-8859-1; header=present',
 
-#  flash[:notice] = "Export complete!"
-    
-
-  end
 end

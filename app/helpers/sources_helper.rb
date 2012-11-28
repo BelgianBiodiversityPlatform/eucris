@@ -4,7 +4,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
       s.orgunits.each do |o|
@@ -57,7 +57,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.fundings.each do |f|
@@ -79,7 +79,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.fundings.each do |f|
@@ -101,7 +101,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.fundings.each do |f|
@@ -127,7 +127,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.orgunits.each do |o|
@@ -149,7 +149,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.orgunits.each do |o|
@@ -167,7 +167,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.orgunits.each do |o|
@@ -187,7 +187,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.orgunits.each do |o|
@@ -226,7 +226,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.orgunits.each do |o|
@@ -252,7 +252,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.orgunits.each do |o|
@@ -275,7 +275,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.orgunits.each do |o|
@@ -299,7 +299,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.people.each do |p|
@@ -318,7 +318,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.people.each do |p|
@@ -340,7 +340,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.people.each do |p|
@@ -361,7 +361,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.people.each do |p|
@@ -400,7 +400,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.people.each do |p|
@@ -426,7 +426,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.projects.each do |p|
@@ -449,7 +449,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') { 
         s.projects.each do |p|
@@ -469,7 +469,7 @@ module SourcesHelper
      builder = Nokogiri::XML::Builder.new do |xml|
      xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
      'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-     'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+     'xmlns:xsi' => @host,
      'release' => @releaseDate,
      'sourceDatabase' => 'BiodivERsA') { 
        s.projects.each do |p|
@@ -488,7 +488,7 @@ module SourcesHelper
       builder = Nokogiri::XML::Builder.new do |xml|
       xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
       'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-      'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+      'xmlns:xsi' => @host,
       'release' => @releaseDate,
       'sourceDatabase' => 'BiodivERsA') { 
         s.projects.each do |p|
@@ -510,7 +510,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.projects.each do |p|
@@ -538,7 +538,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.projects.each do |p|
@@ -564,7 +564,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.projects.each do |p|
@@ -591,7 +591,7 @@ module SourcesHelper
     builder = Nokogiri::XML::Builder.new do |xml|
     xml.CERIF('xsi:schemaLocation' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name+'.xsd',
     'xmlns' => 'http://www.eurocris.org/Uploads/Web%20pages/CERIF2008/Release_1.2/XML-SCHEMAS/'+name, 
-    'xmlns:xsi' => 'http://biodiversa.biodiversity.be',
+    'xmlns:xsi' => @host,
     'release' => @releaseDate,
     'sourceDatabase' => 'BiodivERsA') {
          s.projects.each do |p|
@@ -621,6 +621,7 @@ module SourcesHelper
   def SourcesHelper.to_CERIF
     now =DateTime.now
     @releaseDate=Date.new(now.year,now.month,now.day)
+    @host='http://data.biodiversa.org'
     
     Dir.chdir('export')
     ClassificationsHelper.to_cfClassScheme('cfClassScheme-CLASS', @releaseDate)
@@ -628,7 +629,8 @@ module SourcesHelper
     ClassificationsHelper.to_cfClass('cfClass-CLASS', @releaseDate)
     ClassificationsHelper.to_cfClassTerm('cfClassTerm-LANG', @releaseDate)
     
-    sources=Source.all
+#    sources=Source.all
+    sources=Source.where('origid < 3').all
     sources.each do |s|
     puts s.origid
     Dir.mkdir(s.origid)
