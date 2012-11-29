@@ -2,14 +2,19 @@
 <h3>BiodivERsA Partners</h3>
 <table class="table-striped">
 <tr>
-  <th>Code</th>
   <th>Name</th>
+  <th>Acronym</th>
+  <th>Country</th>
+  <th>URL</th>
 </tr>
 
 <% @sources.each do |source| %>
 <tr>
-    <td><%= link_to source.origid, source %></td>
-    <td><%= source.country.name %>, <%if !source.name.nil?%><%= source.name %><%else%>&nbsp;<%end%></td>
+    <td><%if !source.name.nil?%><%= link_to source.name, source %><%else%>&nbsp;<%end%></td>
+    <td><%= source.origid%></td>
+    <td><%= source.country.name %></td>
+    <td><%if !source.url.nil?%><%= link_to source.url, source.url %><%else%>&nbsp;<%end%></td>
+
 </tr>
 <% end %>
 </table>

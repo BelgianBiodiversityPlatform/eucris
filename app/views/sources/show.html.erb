@@ -3,6 +3,7 @@
 <h3>Source:<%= @source.origid %></h3>
 <dl class="dl-horizontal">
 <dt>Name</dt><dd><%if !@source.name.nil?%><%= @source.name %><%else%>&nbsp;<%end%></dd>
+<dt>Acronym</dt><dd><%= @source.origid %></dd>
 <dt>Country</dt><dd><%= @source.country.name %> (<%= @source.country.code %>)</dd>
 <dt>URL</dt><dd><%if !@source.url.nil?%><%= link_to @source.url, @source.url %><%else%>&nbsp;<%end%></dd>
 </dl>
