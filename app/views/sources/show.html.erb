@@ -27,7 +27,7 @@
 <HR>
 <h3>Other data</h3>
 <ul>
-<li><%= link_to 'Funding Programmes', orgunits_path('source' => @source) %> (<%=@source.fucount%>)</li>
+<li><%= link_to 'Funding Programmes', fundings_path('source' => @source) %> (<%=@source.fucount%>)</li>
 <li><%= link_to 'Projects', projects_path('source' => @source) %> (<%=@source.prcount%>)</li>
 <li><%= link_to 'People', people_path('source' => @source) %> (<%=@source.pecount%>)</li>
 <li><%= link_to 'Orgunits', orgunits_path('source' => @source) %> (<%=@source.oucount%>)</li>
