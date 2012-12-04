@@ -15,6 +15,7 @@
 	<%= link_to 'database', root_path, :class => 'brand'  %>
 	<ul class="nav">
 		<li><%= link_to image_tag("home.png"), root_path %></li>
+		<li><%= link_to 'Home', root_path %></li>
 		<li><%= link_to 'About', about_path %></li>
 		<li><%= link_to 'Search', search_path %></li>
 		<li><%= link_to 'Countries', countries_path %></li>
@@ -24,8 +25,14 @@
 		<li><%= link_to 'Links', links_path %></li>
 	</ul>
 	<ul class="nav pull-right">
-	<%if !current_user.nil? %><li><%= link_to current_user.login, user_path(current_user) %></li><%end%>
-	<li><%if current_user.nil? %><%= link_to "Login", signin_path %><%else%><%= link_to "Logout", signout_path %><%end%></li>
+	<%if current_user.nil? %>
+		<li><%= link_to "Login", signin_path %></li>
+		<li><%= link_to image_tag("unlock.png"), signin_path %></li>
+	<%else%>
+		<li><%= link_to current_user.login, user_path(current_user) %></li>
+		<li><%= link_to "Logout", signout_path %></li>
+		<li><%= link_to image_tag("locked.png"), signout_path %></li>
+	<%end%>
 	</ul>
     </div>
   </div>
