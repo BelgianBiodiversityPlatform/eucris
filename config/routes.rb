@@ -36,6 +36,11 @@ Cristal::Application.routes.draw do
 
     resources :fundings  do
       resources :classifications
+      member do
+        get 'deleteClass'
+        get 'chooseClass'
+        put 'addClass'
+      end
       collection do
          get 'search'
          get 'download'

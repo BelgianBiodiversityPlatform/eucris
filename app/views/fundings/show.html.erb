@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
-<h3 class="head">Funding:<%= @funding.origid %></h3>
+<h3 class="head">Funding:<%= @funding.origid %><%if !current_user.nil? %><%=link_to image_tag("icons/edit.png", :title => 'Edit'), edit_funding_path(@funding)%><%end%></h3>
 
 <dl class="dl-horizontal">
 <dt>Name</dt><dd><%= @funding.name %></dd>
-<dt>Total budget</dt><dd><%if !@funding.amount.nil?%><%= number_to_currency(@funding.amount, :unit => @funding.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<%end%></dd>
-<dt>∑ fundings</dt><dd><%if !@funding.granted.nil?%><%= number_to_currency(@funding.granted, :unit => @funding.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<%end%></dd>
+<dt>Total budget</dt><dd><%if !@funding.amount.nil?%><%= number_to_currency(@funding.amount, :precision => 0, :unit => @funding.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<%end%></dd>
+<dt>∑ fundings</dt><dd><%if !@funding.granted.nil?%><%= number_to_currency(@funding.granted, :precision => 0, :unit => @funding.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<%end%></dd>
 <dt>StartDate</dt><dd><%if !@funding.startdate.nil?%><%= @funding.startdate %><%else%>&nbsp;<%end%></dd>
 <dt>EndDate</dt><dd><%if !@funding.enddate.nil?%><%= @funding.enddate %><%else%>&nbsp;<%end%></dd>
 <dt>URL</dt><dd><%if !@funding.url.nil?%><%= link_to @funding.url, @funding.url %><%else%>&nbsp;<%end%></dd>
@@ -16,12 +16,14 @@
 <h3 class="head">Keywords</h3>
 <p class="clear"><%= @funding.keywords %></p>
 
+<h3 class="head">Classifications
+<%if !current_user.nil? %><%=link_to image_tag("icons/add.png", :title => 'Add'), chooseClass_funding_path(@funding)%><%end%>
+</h3>
 <% if !@funding.classifications.empty? %>
-<h3 class="head">Classifications</h3>
-
 	<table class="table table-striped">
 	<% @funding.classifications.each do |classification| %>
 	<tr><td><%= link_to classification.term, classification %>{<i><%=classification.classscheme.description %></i>}</td>
+	<td><%if !current_user.nil?%><%= link_to image_tag("icons/delete.png", :title => "Delete"), deleteClass_funding_path(@funding, :classification_id => classification.id) %><%end%></td></tr>
 	<% end %>
 	</table>
 <% end %>
@@ -38,9 +40,22 @@
 <% if !@funding.projects.empty? %>
 <h3 class="head">Projects</h3>
 <table class="table table-striped">
-<%= render :partial => "projects/header" %>
-<%= render :partial => "projects/project",
-	           :collection => @funding.projects %>
+<tr>
+  <th>Name</th>
+  <th>Role</th>
+  <th>Start</th>
+  <th>End</th>
+  <th>Amount<br>(<%= @funding.currency%>)</th>
+</tr>
+<% @funding.projects.each do |project| %>
+<tr>
+  <td><%= link_to project.title, project %></td>
+  <td><%= project.classification.term %></td>
+  <td><%= project.startdate %></td>
+  <td><%= project.enddate %></td>
+  <td><%if !project.amount.nil? %><%= number_to_currency( project.amount, :precision => 0, :delimiter =>"." , :format => "%n")%><%else%>&nbsp;<% end %></td>
+</tr>
+<%end%>
 </table>
 <% end %>
 

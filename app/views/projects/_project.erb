@@ -3,6 +3,6 @@
   <td><%= project.classification.term %></td>
   <td><%= project.startdate %></td>
   <td><%= project.enddate %></td>
-  <td><%if !project.amount.nil? %><%= number_to_currency( project.amount, :unit => project.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<% end %></td>
+  <td><%if !project.amount.nil? %><%= number_to_currency( project.amount, :precision => 0, :unit => project.currency, :delimiter =>"." , :format => "%n %u")%><%else%>&nbsp;<% end %></td>
 
 </tr>

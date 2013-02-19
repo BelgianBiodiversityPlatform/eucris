@@ -42,7 +42,6 @@ class FundingsController < ApplicationController
   
   def chooseClass
     @funding = Funding.find(params[:id])
-    @classschemes = Classscheme.originals.all()
     @classification =Classification.new
 
     respond_to do |format|
@@ -50,7 +49,44 @@ class FundingsController < ApplicationController
        format.json  { render :json => @classification }
      end
   end
+
+  def addClass
+    @funding = Funding.find(params[:id])
+    @classification = Classification.find(params[:classification][:id])
+    @funding.classifications<<@classification
+
+    redirect_to funding_path(@funding)
+  end
+
+  def deleteClass
+    @funding = Funding.find(params[:id])
+    @classification = Classification.find(params[:classification_id])
+    @funding.classifications.delete(@classification)
+
+    redirect_to funding_path(@funding)    
+  end
+
   
+  def edit
+    @funding = Funding.find(params[:id])
+
+  end
+  
+  def update
+    @funding = Funding.find(params[:id])
+
+    respond_to do |format|
+      if @funding.update_attributes(params[:funding])
+        format.html  { redirect_to(@funding,
+                      :notice => 'Funding was successfully updated.') }
+        format.json  { head :no_content }
+      else
+        format.html  { render :action => "edit" }
+        format.json  { render :json => @funding.errors,
+                      :status => :unprocessable_entity }
+      end
+    end
+  end  
 
   # GET /fundings/search
   # GET /fundings/search.xml

@@ -1,22 +1,24 @@
 
-delete from cl.person_orgunit where source_id=26;
-delete from cl.project_person where source_id=26;
-delete from cl.project_funding where source_id=26;
-delete from cl.project_orgunit where source_id=26;
-delete from cl.orgunit_funding where source_id=26;
-delete from cl.person_funding where source_id=26;
-delete from cl.orgunit_class where source_id=26;
-delete from cl.project_class where source_id=26;
-delete from cl.person_class where source_id=26;
-delete from cl.orgunits where source_id=26;
-delete from cl.projects where source_id=26;
-delete from cl.people where source_id=26;
+delete from cl.person_orgunit where source_id=2;
+delete from cl.project_person where source_id=2;
+delete from cl.project_funding where source_id=2;
+delete from cl.project_orgunit where source_id=2;
+delete from cl.orgunit_funding where source_id=2;
+delete from cl.person_funding where source_id=2;
+delete from cl.funding_funding where source_id=2;
+delete from cl.orgunit_class where source_id=2;
+delete from cl.project_class where source_id=2;
+delete from cl.person_class where source_id=2;
+#delete from cl.funding_class where source_id=2;
+
+delete from cl.orgunits where source_id=2;
+delete from cl.projects where source_id=2;
+delete from cl.people where source_id=2;
 	
----delete from cl.funding_class where source_id=26;
-delete from cl.fundings where source_id=26;
+delete from cl.fundings where source_id=2;
 	
 
---- full import 01/12/11
+--- full import 14/02/13
 ---fundings
 INSERT INTO cl.fundings(origid, startdate, enddate, amount , currency, url, name , description, keywords, source_id, created_at)(
 	SELECT s.origid || '|' || fu.fuID as origid, fu.StartDate, fu.EndDate, fu.Budget, fu.Currency, fu.URL,
@@ -28,7 +30,7 @@ INSERT INTO cl.fundings(origid, startdate, enddate, amount , currency, url, name
 );
 ---projects
 INSERT INTO cl.projects (origid,  url, acronym, startdate,enddate,title,abstract, keywords, source_id, created_at)(
-	SELECT s.origid || '|' || pr.prID as origid, pr.acronym, pr.URL, pr.StartDate, pr.EndDate, pr.Title, pr.Abstract, pr.Keywords, pr.Source, now()
+	SELECT s.origid || '|' || pr.prID as origid, pr.URL, pr.acronym,  pr.StartDate, pr.EndDate, pr.Title, pr.Abstract, pr.Keywords, pr.Source, now()
 	from xls.pr pr
 	left join cl.sources s on s.id=pr.Source
 	order by pr.Line
@@ -97,13 +99,13 @@ INSERT INTO cl.orgunit_funding(orgunit_id, funding_id, classification_id, startd
 	join cl.classifications class on class.origid='FUNDING-ORGUNIT-LEADING' and class.schemeorigid='LinkRoles'
 	order by link.Line
 ;
-UPDATE cl.sources set updated_at=now() where id=26;
+UPDATE cl.sources set updated_at=now() where id=2;
 update cl.sources source set 
-fucount= (select count(*) as count from cl.fundings where source_id=26), 
-prcount= (select count(*) as count from cl.projects where source_id=26), 
-oucount= (select count(*) as count from cl.orgunits where source_id=26), 
-pecount= (select count(*) as count from cl.people where source_id=26), 
+fucount= (select count(*) as count from cl.fundings where source_id=2), 
+prcount= (select count(*) as count from cl.projects where source_id=2), 
+oucount= (select count(*) as count from cl.orgunits where source_id=2), 
+pecount= (select count(*) as count from cl.people where source_id=2), 
 updated_at=now()
-where id=26;
-UPDATE cl.sources set count=fucount+prcount+oucount+pecount where id=26;
+where id=2;
+UPDATE cl.sources set count=fucount+prcount+oucount+pecount where id=2;
 

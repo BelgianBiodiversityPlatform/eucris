@@ -122,7 +122,7 @@ UPDATE cl.projects SET ts_index_col =
 				left join (select pc.project_id, array_accum(c.term)::text as pcterms from cl.project_class pc
 						left join cl.classifications c on c.id=pc.classification_id
 						group by pc.project_id) as pc on pc.project_id = p.project_id
-				left join (select pp.project_id, array_accum(pe.familyname)::text as ppnames from cl.project_person pp 
+				left join (select pp.project_id, array_accum(pe.familyname || ' ' || pe.firstname)::text as ppnames from cl.project_person pp 
 						left join cl.people pe on pe.id = pp.person_id
 						group by pp.project_id) as pp on pp.project_id= p.project_id
 				left join (select po.project_id, array_accum(ou.name)::text as ponames from cl.project_orgunit po 
@@ -188,7 +188,7 @@ UPDATE cl.orgunits SET ts_index_col =
 				from cl.project_orgunit po 
 				left join cl.projects pr on pr.id = po.project_id
 				group by po.orgunit_id) as pr on pr.orgunit_id=o.orgunit_id
-			left join (select po.orgunit_id, array_accum(pe.familyname)::text as ponames from cl.person_orgunit po 
+			left join (select po.orgunit_id, array_accum(pe.familyname || ' ' || pe.firstname)::text as ponames from cl.person_orgunit po 
 					left join cl.people pe on pe.id = po.person_id
 					group by po.orgunit_id) as po on po.orgunit_id=o.orgunit_id
 			left join (select of.orgunit_id, array_accum(fu.name)::text as ofnames from cl.orgunit_funding of 

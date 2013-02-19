@@ -2,14 +2,14 @@
 <table class="table table-striped">
 <tr>
   <th>Name</th>
-  <th>Amount</th>
+  <th>Amount<br>(<%= @fundings.first.currency%>)</th>
   <th>Start</th>
   <th>End</th>
 </tr>
 <% @fundings.each do |funding| %>
 	<tr>
 	  <td><%= link_to funding.name, funding %></td>
-	  <td><%= number_to_currency(funding.amount, :unit => funding.currency, :delimiter =>"." , :format => "%n %u")%></td>
+	  <td><%= number_to_currency(funding.amount, :precision => 0, :delimiter =>"." , :format => "%n")%></td>
 	  <td><%= funding.startdate %></td>
 	  <td><%= funding.enddate %></td>
 	</tr>
