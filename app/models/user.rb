@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   attr_accessor :password
-  attr_accessible :login, :familyname, :firstname, :email, :password, :salt, :salted_password, :activated, :institution, :purpose, :country_id
+  attr_accessible :login, :familyname, :firstname, :email, :password, :salt, :salted_password, :activated, :institution, :purpose, :country_id, :terms
 
   has_and_belongs_to_many :sources, :join_table => "user_source"
   belongs_to :country
@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   validates :login, :presence   => true,
             :uniqueness => { :case_sensitive => false }
+
+  validates :terms, :acceptance   => true
 
 
   # Automatically create the virtual attribute 'password_confirmation'.

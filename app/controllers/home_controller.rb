@@ -1,10 +1,14 @@
 class HomeController < ApplicationController
+  skip_before_filter :authorize
+
   def about
   end
   def links
     @sources = Source.order('origid').all
   end
   def faq
+  end
+  def dua
   end
   def index
     @fpCount= Funding.count();
@@ -15,8 +19,6 @@ class HomeController < ApplicationController
     @soCount= Source.count();
     @coCount= Country.partners.count();
     
-  end
-  def search
   end
   def contact
     @contact_message = Contact_Message.new    

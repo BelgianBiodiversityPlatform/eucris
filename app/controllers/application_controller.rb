@@ -2,7 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
  include SessionsHelper
   # Require authentication for edit delete and download.
-  before_filter :authorize, :only => [:edit, :delete, :download]
+#  before_filter :authorize, :only => [:edit, :delete, :download]
+  before_filter :authorize
+  
+#  :except => [:contact, :about, :faq, :links, :signin, :signup]
 
    layout "simple"
 

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authorize, :only => [:addSource, :deleteSource]
+  skip_before_filter :authorize, :only => [:new, :create]
 
   # GET /users
   # GET /users.xml
@@ -22,6 +22,8 @@ class UsersController < ApplicationController
     end
   end
   
+  def search
+  end
   
   def create
     @user = User.new(params[:user])

@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
     else
       # Sign the user in and redirect to the user's show page.
       sign_in user
-      redirect_to flash[:return_to]
+#      redirect_to flash[:return_to]
+       redirect_to current_user
     end
   end
 

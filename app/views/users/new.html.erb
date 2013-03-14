@@ -31,6 +31,8 @@
 <%= f.password_field :password, :required => 'required' %><BR>
 <%= f.label :password_confirmation, 'Re-enter your password *' %>
 <%= f.password_field :password_confirmation, :required => 'required' %><BR>
+<%= f.check_box :terms %>
+<%= f.label :dua, 'I accept the terms of the <a href="/dua"> Data Usage Agreement</a>. *'.html_safe %>
 <%= f.submit %>
 <% end %>
 

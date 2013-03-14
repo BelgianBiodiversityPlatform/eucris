@@ -1,6 +1,10 @@
 <h3>Welcome to the BiodivERsA database</h3>
 <p>The <b>BiodivERsA</b> database compiles information on European national and regional funding programmes and funding organisations supporting biodiversity research.</p>
 
+<div class="well">
+<p>Thanks to dedicated efforts of <%= link_to 'BiodivERsA partners', links_path %> (<%=@soCount%> <%= link_to 'data sources', sources_path %> accross <%=@coCount%> <%= link_to 'countries', countries_path %>), the database delivers information related to research programs funded by the research agencies who are members of BiodivERsA but eventually aims at compiling information on all funding programs open to biodiversity research in Europe, at regional, national and European level. Indeed, the improvement and enlargement of this database, to include all currently and formerly running national programmes relevant for biodiversity research will contribute significantly to the development of the European Research Area, and help the identification of research gaps on a European level. The BiodivERsA consortium itself will also benefit from such upgrade to better understand national priorities and opportunities for cooperation and potential future partnerships to improve the identification of existing gaps and future needs for new facilities, as well as detecting potential barriers for successful cooperation.</p>
+</div>
+
 <p>This database provides an <b>open access</b> to most <b>biodiversity research information in Europe</b>, including:</p>
 <ul>
 <li><%= number_with_delimiter(@faCount, :delimiter => ".") %> Funding Organisations</li>
@@ -9,13 +13,8 @@
 <li><%= number_with_delimiter(@prCount, :delimiter => ".") %> Research Projects</li>
 <li><%= number_with_delimiter(@peCount, :delimiter => ".") %> People</li>
 </ul>
-<p>All these objects can be retrieved and download through the <%= link_to 'search page', search_path %>.</p>
 
-<div class="well">
-<p>Thanks to dedicated efforts of <%= link_to 'BiodivERsA partners', links_path %> (<%=@soCount%> <%= link_to 'data sources', sources_path %> accross <%=@coCount%> <%= link_to 'countries', countries_path %>), the database delivers information related to research programs funded by the research agencies who are members of BiodivERsA but eventually aims at compiling information on all funding programs open to biodiversity research in Europe, at regional, national and European level. Indeed, the improvement and enlargement of this database, to include all currently and formerly running national programmes relevant for biodiversity research will contribute significantly to the development of the European Research Area, and help the identification of research gaps on a European level. The BiodivERsA consortium itself will also benefit from such upgrade to better understand national priorities and opportunities for cooperation and potential future partnerships to improve the identification of existing gaps and future needs for new facilities, as well as detecting potential barriers for successful cooperation.</p>
-</div>
-<%if current_user.nil? %>
-<p>Although registration is <b>optional</b> and <b>free</b>, we strongly encourage you to sign up <%= link_to "here", signup_path %>.<br>
+<p>This database is <b>freely</b> accessible to everyone; however user <%= link_to "registration", signup_path %> is <b>mandatory.</b><br>
 This will facilitate the communication between BiodivERsA database adminstrators and the community of users.<br>
-As a <b>registered user</b> you will be able to <b>download</b> your search results in CSV format and manage them with your prefered spread sheet software.</p>
-<% end %>
+As a <b>registered user</b> you will be able to <%= link_to 'search', search_path %> and <b>download</b> your search results in CSV format compatible with your prefered spread sheet software.</p>
+<p>Please read our <%= link_to "Data Usage Agreement", dua_path %>.</p>

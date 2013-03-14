@@ -1,6 +1,12 @@
 <h2>Frequently Asked Questions</h2>
-<h4>How can I download and view the data?</h4>
-<p>(response still to be added)</p>
+<h4>How do I download Data?</h4>
+<p>You can download your search results by clicking the <%= image_tag('icons/download.png') %> on top of the search results table.<br>
+A <%= link_to('CSV', 'http://en.wikipedia.org/wiki/Comma-separated_values') %> (UTF-8 encoded) Text file is generated and downloaded to your computer.<br>
+This file can then be opened by/imported into your favorite spreadsheet software.<br>
+Please refers to your spreasheet reference manual if it does not automatically open/convert the file.</p>
+
+<h4>May I re-use the downloaded Data?</h4>
+<%= render 'dua' %>
 
 <h4>What does “(%) Relevance” indicates?</h4>
 <p>It refers to the persistence of the search. The higher the (%) value for a particular hit, the better this hit will correspond to the search keywords.</p>
@@ -13,3 +19,4 @@
 
 <h4>On the project page, what is the difference between “amount” (in the header) and “fundings” (further down the page)? </h4>
 <p>“Amount” is the overall project budget while “fundings” relate to one or more grants received by this project. There is clearly a relation between the two – but currently the sum of all grants received by the project is not shown.</p>
+
