@@ -99,13 +99,13 @@ INSERT INTO cl.orgunit_funding(orgunit_id, funding_id, classification_id, startd
 	join cl.classifications class on class.origid='FUNDING-ORGUNIT-LEADING' and class.schemeorigid='LinkRoles'
 	order by link.Line
 ;
-UPDATE cl.sources set updated_at=now() where id=8;
+UPDATE cl.sources set updated_at=now() where id=30;
 update cl.sources source set 
-fucount= (select count(*) as count from cl.fundings where source_id=8), 
-prcount= (select count(*) as count from cl.projects where source_id=8), 
-oucount= (select count(*) as count from cl.orgunits where source_id=8), 
-pecount= (select count(*) as count from cl.people where source_id=8), 
+fucount= (select count(*) as count from cl.fundings where source_id=30), 
+prcount= (select count(*) as count from cl.projects where source_id=30), 
+oucount= (select count(*) as count from cl.orgunits where source_id=30), 
+pecount= (select count(*) as count from cl.people where source_id=30), 
 updated_at=now()
-where id=8;
-UPDATE cl.sources set count=fucount+prcount+oucount+pecount where id=8;
+where id=30;
+UPDATE cl.sources set count=fucount+prcount+oucount+pecount where id=30;
 

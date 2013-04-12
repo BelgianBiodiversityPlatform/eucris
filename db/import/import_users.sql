@@ -19,9 +19,9 @@ COPY sources FROM '/home/aheugheb/db2/biodiversa/Sources.csv' NULL as '' DELIMIT
 ---	SELECT distinct(split_part(cfprojid, '|', 1) ) as source from cfproj	UNION
 ---	SELECT distinct(split_part(cfpersid, '|', 1) ) as source from cfpers order by source
 INSERT INTO cl.sources(origid, url, acronym, name, description, country_id) values 
-('anr','http://www.agence-nationale-recherche.fr/','ANR','National Agency for Research - Agence Nationale de la Recherche', 
-	'ANR is a funding agency active in all fields of science. The agency publishes calls for research proposals in the field of biodiversity as part of its Ecosystem and sustainable development programme. The biodiversity part of the programme is managed by IFB.',
-	74);
+('self','http://www.biodiversa.org/','BiodivERsA','BiodivERsA', 
+	'Funded under the FP7 European Research Area Programme(ERA-NET), BiodivERsA works with a network of 21 national funding agencies in 15 countries.',
+	247);
 
 
 

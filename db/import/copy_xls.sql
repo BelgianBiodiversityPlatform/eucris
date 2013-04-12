@@ -23,6 +23,17 @@ COPY xls.pr_fu FROM '/home/aheugheb/db2/biodiversa/Belspo/Project-Funding-Tablea
 COPY xls.pr_ou FROM '/home/aheugheb/db2/biodiversa/Belspo/Project-OrgUnit-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
 COPY xls.ou_fu FROM '/home/aheugheb/db2/biodiversa/Belspo/OrgUnit-Funding-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
 
+--- BiodivERsA
+set datestyle='DMY';
+COPY xls.pe FROM '/home/aheugheb/db2/biodiversa/Biodiversa/People-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.pr FROM '/home/aheugheb/db2/biodiversa/Biodiversa/Projects-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.fu FROM '/home/aheugheb/db2/biodiversa/Biodiversa/Fundings-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.ou FROM '/home/aheugheb/db2/biodiversa/Biodiversa/OrgUnits-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.pe_ou FROM '/home/aheugheb/db2/biodiversa/Biodiversa/Person-OrgUnit-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.pe_pr FROM '/home/aheugheb/db2/biodiversa/Biodiversa/Person-Project-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.pr_fu FROM '/home/aheugheb/db2/biodiversa/Biodiversa/Project-Funding-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.pr_ou FROM '/home/aheugheb/db2/biodiversa/Biodiversa/Project-OrgUnit-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
+COPY xls.ou_fu FROM '/home/aheugheb/db2/biodiversa/Biodiversa/OrgUnit-Funding-Tableau 1.csv' NULL AS '' DELIMITER ';' HEADER CSV;
 
 --- BNSF
 set datestyle='DMY';
