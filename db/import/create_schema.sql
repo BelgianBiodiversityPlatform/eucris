@@ -23,6 +23,13 @@ create table cl.countries(
 		name		varchar(255) unique
 );
 
+-- DROP TABLE cl.documents CASCADE;
+create table cl.documents(
+		id 			serial primary key,
+		filename	varchar(255) unique,
+		title		varchar(255)
+);
+
 -- DROP TABLE cl.sources CASCADE;
 create table cl.sources(
 	id 			serial primary key,

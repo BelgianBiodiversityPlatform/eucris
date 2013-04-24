@@ -1,5 +1,5 @@
 <h2>Links</h2>
-<h3>BiodivERsA Partners</h3>
+<h3>Data Sources</h3>
 <table class="table-striped">
 <tr>
   <th>Name</th>
@@ -29,4 +29,11 @@
 <li><a href="http://www.belspo.be/belspo/fedra/intro_en.stm", target="blank">FEDRA database</a>, research actions funded by BELSPO (Belgian Science Policy)</li>
 <li><a href="http://www.forskningsradet.no/en/Project_database/1184150364215", target="blank">RCN's projects database</a> (RCN-Research Council Norway)</li>
 <li><a href="http://www.portailfrb.fr", target="blank">FRB's database</a> (FRB-Fondation pour la Recherche sur la Biodiversité)</li>
+</ul>
+
+<h3>Related documents</h3>
+<ul>
+<% @documents.each do |doc| %>
+<li><%= link_to doc.title, doc %></li>
+<% end %>
 </ul>

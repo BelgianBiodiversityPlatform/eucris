@@ -65,9 +65,9 @@ INSERT INTO cl.fundings(origid, startdate, enddate, amount , currency, url, name
 );
 
 ---projects
-INSERT INTO cl.projects (origid, acronym, url, startdate,enddate,title,abstract, keywords, source_id, created_at)(
+INSERT INTO cl.projects (origid, acronym, url, startdate,enddate, amount, currency,title,abstract, keywords, source_id, created_at)(
 	SELECT s.origid || '|' || pr.prID, 
-		pr.Acronym, pr.URL, pr.StartDate, pr.EndDate, pr.Title, pr.Abstract, pr.Keywords, pr.Source, now()
+		pr.Acronym, pr.URL, pr.StartDate, pr.EndDate, pr.Budget, pr.Currency, pr.Title, pr.Abstract, pr.Keywords, pr.Source, now()
 	from xls.pr pr
 	left join cl.sources s on s.id=pr.Source
 	where  pr.new=true

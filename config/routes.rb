@@ -52,7 +52,7 @@ Cristal::Application.routes.draw do
     resources :sources 
     resources :classifications 
     resources :schemes 
-
+    resources :documents
 
     resources :users do
       resources :sources

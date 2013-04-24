@@ -5,13 +5,16 @@ class HomeController < ApplicationController
   end
   def links
     @sources = Source.order('origid').all
+    @documents = Document.all
+    
   end
   def faq
   end
   def dua
   end
   def index
-    @fpCount= Funding.count();
+#    @fpCount= Funding.count();
+    @fpCount= 578; # To avoid confusion (booklet vs online database)
     @faCount= Orgunit.agencies.count();
     @roCount= Orgunit.research.count();
     @prCount= Project.count();

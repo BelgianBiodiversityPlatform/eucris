@@ -1,21 +1,20 @@
 
-delete from cl.person_orgunit where source_id=8;
-delete from cl.project_person where source_id=8;
-delete from cl.project_funding where source_id=8;
-delete from cl.project_orgunit where source_id=8;
-delete from cl.orgunit_funding where source_id=8;
-delete from cl.person_funding where source_id=8;
-delete from cl.funding_funding where source_id=8;
-delete from cl.orgunit_class where source_id=8;
-delete from cl.project_class where source_id=8;
-delete from cl.person_class where source_id=8;
-#delete from cl.funding_class where source_id=8;
+delete from cl.person_orgunit where source_id=30;
+delete from cl.project_person where source_id=30;
+delete from cl.project_funding where source_id=30;
+delete from cl.project_orgunit where source_id=30;
+delete from cl.orgunit_funding where source_id=30;
+delete from cl.person_funding where source_id=30;
+delete from cl.funding_funding where source_id=30;
+delete from cl.orgunit_class where source_id=30;
+delete from cl.project_class where source_id=30;
+delete from cl.person_class where source_id=30;
+delete from cl.funding_class where source_id=30;
 
-delete from cl.orgunits where source_id=8;
-delete from cl.projects where source_id=8;
-delete from cl.people where source_id=8;
-	
-delete from cl.fundings where source_id=8;
+delete from cl.orgunits where source_id=30;
+delete from cl.projects where source_id=30;
+delete from cl.people where source_id=30;	
+delete from cl.fundings where source_id=30;
 	
 
 --- full import 14/02/13
@@ -29,8 +28,8 @@ INSERT INTO cl.fundings(origid, startdate, enddate, amount , currency, url, name
 	order by fu.Line
 );
 ---projects
-INSERT INTO cl.projects (origid,  url, acronym, startdate,enddate,title,abstract, keywords, source_id, created_at)(
-	SELECT s.origid || '|' || pr.prID as origid, pr.URL, pr.acronym,  pr.StartDate, pr.EndDate, pr.Title, pr.Abstract, pr.Keywords, pr.Source, now()
+INSERT INTO cl.projects (origid,  url, acronym, startdate,enddate,amount, currency,title,abstract, keywords, source_id, created_at)(
+	SELECT s.origid || '|' || pr.prID as origid, pr.URL, pr.acronym,  pr.StartDate, pr.EndDate, pr.Budget, pr.Currency, pr.Title, pr.Abstract, pr.Keywords, pr.Source, now()
 	from xls.pr pr
 	left join cl.sources s on s.id=pr.Source
 	order by pr.Line
