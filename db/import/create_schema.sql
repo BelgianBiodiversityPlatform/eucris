@@ -28,6 +28,8 @@ create table cl.documents(
 		id 			serial primary key,
 		filename	varchar(255) unique,
 		title		varchar(255)
+		name 		varchar(64) unique,
+		icon 		varchar(64)
 );
 
 -- DROP TABLE cl.sources CASCADE;

@@ -16,7 +16,6 @@
 	<ul class="nav">
 		<li><%= link_to image_tag("home.png"), root_path %></li>
 		<li><%= link_to 'Home', root_path %></li>
-		<li><%= link_to 'About', about_path %></li>
 		<%if !current_user.nil? %>
 		<li><%= link_to 'Search', search_path %></li>
 		<li><%= link_to 'Countries', countries_path %></li>
@@ -50,7 +49,7 @@
 <div class="container">
     <div class="span12">
 <hr>
-	<div class="row pull-right"> v20130314 © 2012 by the <%=link_to 'Belgian Biodiversity Platform', 'http://www.biodiversity.be' %></div>
+	<div class="row pull-right"> v20130724 © 2012 by the <%=link_to 'Belgian Biodiversity Platform', 'http://www.biodiversity.be' %></div>
 </div>
 </div>
 </body>

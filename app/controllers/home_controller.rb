@@ -1,8 +1,6 @@
 class HomeController < ApplicationController
   skip_before_filter :authorize
 
-  def about
-  end
   def links
     @sources = Source.order('origid').all
     @documents = Document.all
@@ -14,7 +12,8 @@ class HomeController < ApplicationController
   end
   def index
 #    @fpCount= Funding.count();
-    @fpCount= 578; # To avoid confusion (booklet vs online database)
+    @acCount= 603; # To avoid confusion (booklet vs online database)
+    @fpCount= 216; # To avoid confusion (booklet vs online database)
     @faCount= Orgunit.agencies.count();
     @roCount= Orgunit.research.count();
     @prCount= Project.count();

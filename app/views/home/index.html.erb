@@ -8,7 +8,7 @@
 <p>This database provides an <b>open access</b> to most <b>biodiversity research information in Europe</b>, including:</p>
 <ul>
 <li><%= number_with_delimiter(@faCount, :delimiter => ".") %> Funding Organisations</li>
-<li><%= number_with_delimiter(@fpCount, :delimiter => ".") %> Funding Programmes</li>
+<li><%= number_with_delimiter(@fpCount, :delimiter => ".") %> Funding Programmes (<%= number_with_delimiter(@acCount, :delimiter => ".")%> Annual Calls)</li>
 <li><%= number_with_delimiter(@roCount, :delimiter => ".") %> Research Organisations</li>
 <li><%= number_with_delimiter(@prCount, :delimiter => ".") %> Research Projects</li>
 <li><%= number_with_delimiter(@peCount, :delimiter => ".") %> People</li>
@@ -16,5 +16,9 @@
 
 <p>This database is <b>freely</b> accessible to everyone; however user <%= link_to "registration", signup_path %> is <b>mandatory.</b><br>
 This will facilitate the communication between BiodivERsA database adminstrators and the community of users.<br>
-As a <b>registered user</b> you will be able to <%= link_to 'search', search_path %> and <b>download</b> your search results in CSV format compatible with your preferred spreadsheet software.</p>
-<p>Please read our <%= link_to "Data Usage Agreement", dua_path %>.</p>
+As a <b>registered user</b> you will be able to <%= link_to 'search', search_path %> and <b>download</b> your search results in CSV format compatible with your preferred spreadsheet software. <br> For further information, please read our <%= link_to "Data Usage Agreement", dua_path %>.</p>
+<hr>
+<p>The BiodivERsA database is a <a href="http://en.wikipedia.org/wiki/Current_Research_Information_System", target="blank">Current Research Information System(CRIS)</a> that compiles information about past and current funding programs on biodiversity in Europe (including thematic and blue sky programs, grants, fellowships and studentships), research organisations, and project leading researchers active in biodiversity research. As such, the database aims to help any scientist in the EU to identify potential resources and network opportunities to further develop their research. The database also strives to help the BiodivERsA consortium in analysing the biodiversity funding landscape, and in identifying biodiversity research priorities to design common calls. Finally, the database aims at helping to find scientific expertise to specific policy questions, which can, e.g. be a support mechanism for the bioversity Network of knowledge (EU-project NoK) and similar initiatives.</p>
+<p>The database complies to the CERIF standard (Common European Research Information Format). This CRIS exchange scheme covers objects, being <i>“Funding Programme”</i> (i.e. organizational grouping of research projects or activities with a common funding and steering mechanism), <i>“Funding organisation”</i> (i.e. public, private or charitable organisation funding research open to external competition), <i>“Project”</i> (i.e. funded units within or outside a research program which has defined goals, objectives and timeframe), <i>“Research organisation”</i> (universities or research institutes) and <i>“Person”</i> (project managers and researchers).</p>
+
+<p>For more information, please contact <a href='mailto:h.eggermont@biodiversity.be'>Hilde Eggermont</a>, at Belgian Science Policy.</p>

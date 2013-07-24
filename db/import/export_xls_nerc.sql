@@ -9,11 +9,12 @@ CREATE TABLE export.sources (
 	origid	varchar(64)	
 );
 ---sources to be exported
-INSERT into export.sources (select id, origid from cl.sources where origid='frb');
+INSERT into export.sources (select id, origid from cl.sources where origid='nerc');
 
 ---people-
 CREATE OR REPLACE VIEW export.people AS 
-	SELECT split_part(p.origid, '|', 2) as peID, 
+	SELECT p.id as peID, 
+		p.origid as origid,
 		p.firstname as FirstName, 
 		p.familyname as LastName, 
 		c.code as CountryCode,
@@ -33,7 +34,8 @@ order by Source, peID;
 
 ---orgunits-
 CREATE OR REPLACE VIEW export.orgunits AS 
-	SELECT split_part(o.origid, '|', 2) as ouID, 
+	SELECT o.id as ouID, 
+		o.origid as origid,
 		o.acronym as Acronym, 
 		o.name as Name, 
 		translate(o.activity, E'\r\n', '  ') as InstituteType,
@@ -58,7 +60,8 @@ order by Source, ouID;
 
 ---projects-
 CREATE OR REPLACE VIEW export.projects AS 
-	SELECT split_part(p.origid, '|', 2) as prID, 
+	SELECT p.id as prID, 
+		p.origid as origid,
 		p.title as Title, 
 		translate(p.abstract, E'\r\n', '  ') as Abstract, 
 		p.amount as budget,
@@ -81,7 +84,8 @@ order by Source, prID;
 
 ---fundings-
 CREATE OR REPLACE VIEW export.fundings AS 
-	SELECT split_part(f.origid, '|', 2) as fuID, 
+	SELECT f.id as fuID, 
+		f.origid as origid,
 		f.name as Name, 
 		f.amount as Budget,
 		f.currency as Currency,
@@ -100,8 +104,8 @@ order by Source, fuID;
 
 ---pe_ou links-
 CREATE OR REPLACE VIEW export.person_orgunit AS 
-	SELECT split_part(pe.origid, '|', 2) as peID, 
-		split_part(ou.origid, '|', 2) as ouID, 
+	SELECT pe.id as peID, 
+		ou.id as ouID, 
 		c.term as Role, 
 		l.startdate as StartDate,
 		l.enddate as EndDate,
@@ -115,8 +119,8 @@ order by Source, peID, ouID;
 
 ---pe_pr links-
 CREATE OR REPLACE VIEW export.person_project AS 
-	SELECT split_part(pe.origid, '|', 2) as peID, 
-		split_part(pr.origid, '|', 2) as prID, 
+	SELECT pe.id as peID, 
+		pr.id as prID, 
 		c.term as Role, 
 		l.startdate as StartDate,
 		l.enddate as EndDate,
@@ -130,8 +134,8 @@ order by Source, peID, prID;
 
 ---pr_fu links-
 CREATE OR REPLACE VIEW export.project_funding AS 
-	SELECT split_part(pr.origid, '|', 2) as prID, 
-		split_part(fu.origid, '|', 2) as fuID, 
+	SELECT pr.id as prID, 
+		fu.id as fuID, 
 		c.term as Role, 
 		l.startdate as StartDate,
 		l.enddate as EndDate,
@@ -147,8 +151,8 @@ order by Source, prID, fuID;
 
 ---pr_ou links-
 CREATE OR REPLACE VIEW export.project_orgunit AS 
-	SELECT split_part(pr.origid, '|', 2) as prID, 
-		split_part(ou.origid, '|', 2) as ouID, 
+	SELECT pr.id as prID, 
+		ou.id as ouID, 
 		c.term as Role, 
 		l.startdate as StartDate,
 		l.enddate as EndDate,
@@ -164,8 +168,8 @@ order by Source, prID, ouID;
 
 ---ou_fu links-
 CREATE OR REPLACE VIEW export.orgunit_funding AS 
-	SELECT split_part(ou.origid, '|', 2) as ouID, 
-		split_part(fu.origid, '|', 2) as fuID, 
+	SELECT ou.id as ouID, 
+		fu.id as fuID, 
 		c.term as Role, 
 		l.startdate as StartDate,
 		l.enddate as EndDate,

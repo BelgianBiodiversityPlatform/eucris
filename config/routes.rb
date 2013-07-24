@@ -52,7 +52,11 @@ Cristal::Application.routes.draw do
     resources :sources 
     resources :classifications 
     resources :schemes 
-    resources :documents
+    resources :documents do
+      collection do
+        get 'download'
+      end
+    end
 
     resources :users do
       resources :sources
@@ -78,7 +82,6 @@ Cristal::Application.routes.draw do
     match '/signout', :to => 'sessions#destroy'
     match '/person/show/:origid', :to => 'people#findById'
     match '/search',  :to => 'users#search'
-    match '/about',  :to => 'home#about'
     match '/faq',  :to => 'home#faq'
     match '/dua',  :to => 'home#dua'
     match '/links',  :to => 'home#links'

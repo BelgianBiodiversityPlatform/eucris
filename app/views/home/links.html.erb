@@ -1,4 +1,12 @@
 <h2>Links</h2>
+
+<h3>Documents</h3>
+<ul>
+<% @documents.each do |doc| %>
+<li><%=doc.title%>&nbsp;<%= link_to image_tag("icons/download.png", :title =>'download' ), download_documents_path(:name => doc.name) %></li>
+<% end %>
+</ul>
+<hr>
 <h3>Data Sources</h3>
 <table class="table-striped">
 <tr>
@@ -18,7 +26,7 @@
 </tr>
 <% end %>
 </table>
-
+<hr>
 <h3>Related databases</h3>
 <ul>
 <li><a href="http://gepris.dfg.de/gepris/OCTOPUS", target="blank">GEPRIS database</a> (DFG-German Research Foundation)</li>
@@ -29,11 +37,5 @@
 <li><a href="http://www.belspo.be/belspo/fedra/intro_en.stm", target="blank">FEDRA database</a>, research actions funded by BELSPO (Belgian Science Policy)</li>
 <li><a href="http://www.forskningsradet.no/en/Project_database/1184150364215", target="blank">RCN's projects database</a> (RCN-Research Council Norway)</li>
 <li><a href="http://www.portailfrb.fr", target="blank">FRB's database</a> (FRB-Fondation pour la Recherche sur la Biodiversité)</li>
-</ul>
-
-<h3>Related documents</h3>
-<ul>
-<% @documents.each do |doc| %>
-<li><%= link_to doc.title, doc %></li>
-<% end %>
+<li><a href="http://cordis.europa.eu/fp7/projects_en.html", target="blank">European FP7- project database</a></li> 
 </ul>
