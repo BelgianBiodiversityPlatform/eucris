@@ -27,7 +27,7 @@ create table cl.countries(
 create table cl.documents(
 		id 			serial primary key,
 		filename	varchar(255) unique,
-		title		varchar(255)
+		title		text,
 		name 		varchar(64) unique,
 		icon 		varchar(64)
 );

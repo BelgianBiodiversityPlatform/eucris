@@ -1,11 +1,11 @@
 <h2>Links</h2>
 
 <h3>Documents</h3>
-<ul>
+<table class="table-striped">
 <% @documents.each do |doc| %>
-<li><%=doc.title%>&nbsp;<%= link_to image_tag("icons/download.png", :title =>'download' ), download_documents_path(:name => doc.name) %></li>
+	<tr><td><%= link_to image_tag(doc.icon, :title =>'download' ), download_documents_path(:name => doc.name) %></td><td><%=doc.title%></td></tr>
 <% end %>
-</ul>
+</table>
 <hr>
 <h3>Data Sources</h3>
 <table class="table-striped">
