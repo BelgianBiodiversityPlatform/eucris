@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def links
     @sources = Source.order('origid').all
-    @documents = Document.all
+    @documents = Document.order('name').all
     
   end
   def faq
