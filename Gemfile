@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby "1.9.3"
 
 gem 'rails', '3.0.9'
 
@@ -20,7 +21,7 @@ gem 'unicorn'
 
 # Bundle the extra gems:
 # gem 'bj'
-gem 'pg', '0.14.0'
+gem 'pg', '0.16.0'
 #gem 'nokogiri', '1.5.5'
 gem 'fastercsv', '1.5.5'
 gem 'kaminari'

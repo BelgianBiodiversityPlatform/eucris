@@ -9,7 +9,7 @@ CREATE TABLE export.sources (
 	origid	varchar(64)	
 );
 ---sources to be exported
-INSERT into export.sources (select id, origid from cl.sources where origid='frb');
+INSERT into export.sources (select id, origid from cl.sources where origid='nwo');
 
 ---people-
 CREATE OR REPLACE VIEW export.people AS 

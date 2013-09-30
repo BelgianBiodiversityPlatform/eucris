@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
   def download
     @document = Document.find(:first, :conditions =>'name =\'' + params[:name] + '\'')
     docpath= Rails.root.to_s + '/public/documents/' + @document.filename
-    send_file docpath, :type=>"application/pdf"
+    send_file docpath, :type=>@document.mimetype
   end
 
 end
