@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :authorize, :only => [:new, :create]
+  skip_before_filter :authorize, :only => [:new, :create, :activate_account, :request_new_password, :generate_and_send_new_password]
 
   # GET /users
   # GET /users.xml
