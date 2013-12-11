@@ -1,20 +1,20 @@
 
-delete from cl.person_orgunit where source_id=19;
-delete from cl.project_person where source_id=19;
-delete from cl.project_funding where source_id=19;
-delete from cl.project_orgunit where source_id=19;
-delete from cl.orgunit_funding where source_id=19;
-delete from cl.person_funding where source_id=19;
-delete from cl.funding_funding where source_id=19;
-delete from cl.orgunit_class where source_id=19;
-delete from cl.project_class where source_id=19;
-delete from cl.person_class where source_id=19;
-delete from cl.funding_class where funding_id in (select id from cl.fundings where source_id=19);
+delete from cl.person_orgunit where source_id=11;
+delete from cl.project_person where source_id=11;
+delete from cl.project_funding where source_id=11;
+delete from cl.project_orgunit where source_id=11;
+delete from cl.orgunit_funding where source_id=11;
+delete from cl.person_funding where source_id=11;
+delete from cl.funding_funding where source_id=11;
+delete from cl.orgunit_class where source_id=11;
+delete from cl.project_class where source_id=11;
+delete from cl.person_class where source_id=11;
+delete from cl.funding_class where funding_id in (select id from cl.fundings where source_id=11);
 
-delete from cl.orgunits where source_id=19;
-delete from cl.projects where source_id=19;
-delete from cl.people where source_id=19;	
-delete from cl.fundings where source_id=19;
+delete from cl.orgunits where source_id=11;
+delete from cl.projects where source_id=11;
+delete from cl.people where source_id=11;	
+delete from cl.fundings where source_id=11;
 	
 
 --- full import 14/02/13
@@ -100,20 +100,20 @@ INSERT INTO cl.orgunit_funding(orgunit_id, funding_id, classification_id, startd
 ;
 
 update cl.orgunits ou  set isFunding=true
-	from (select orgunit_id from cl.orgunit_funding where source_id=19) as tmp
+	from (select orgunit_id from cl.orgunit_funding where source_id=11) as tmp
 	where ou.id = tmp.orgunit_id;
 
 
-UPDATE cl.sources set updated_at=now() where id=19;
+UPDATE cl.sources set updated_at=now() where id=11;
 update cl.sources source set 
-fucount= (select count(*) as count from cl.fundings where source_id=19), 
-prcount= (select count(*) as count from cl.projects where source_id=19), 
-oucount= (select count(*) as count from cl.orgunits where source_id=19), 
-focount= (select count(*) as count from cl.orgunits where source_id=19 and isFunding=true), 
-rocount= (select count(*) as count from cl.orgunits where source_id=19 and isFunding=false), 
-pecount= (select count(*) as count from cl.people where source_id=19), 
+fucount= (select count(*) as count from cl.fundings where source_id=11), 
+prcount= (select count(*) as count from cl.projects where source_id=11), 
+oucount= (select count(*) as count from cl.orgunits where source_id=11), 
+focount= (select count(*) as count from cl.orgunits where source_id=11 and isFunding=true), 
+rocount= (select count(*) as count from cl.orgunits where source_id=11 and isFunding=false), 
+pecount= (select count(*) as count from cl.people where source_id=11), 
 updated_at=now()
-where id=19;
+where id=11;
 
-UPDATE cl.sources set count=fucount+prcount+oucount+pecount where id=19;
+UPDATE cl.sources set count=fucount+prcount+oucount+pecount where id=11;
 
