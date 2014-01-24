@@ -11,9 +11,9 @@ class HomeController < ApplicationController
   def dua
   end
   def index
-#    @fpCount= Funding.count();
     @acCount= 603; # To avoid confusion (booklet vs online database)
-    @fpCount= 216; # To avoid confusion (booklet vs online database)
+#    @fpCount= 216; # To avoid confusion (booklet vs online database)
+    @fpCount= Funding.count();
     @faCount= Orgunit.agencies.count();
     @roCount= Orgunit.research.count();
     @prCount= Project.count();
